@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapitre 4 Traitement des fastqs | BIA1401 - 2024 - Introduction à R</title>
+  <meta name="description" content="Chapitre 4 Traitement des fastqs | BIA1401 - 2024 - Introduction à R" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapitre 4 Traitement des fastqs | BIA1401 - 2024 - Introduction à R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapitre 4 Traitement des fastqs | BIA1401 - 2024 - Introduction à R" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="scripter-avec-rstudio.html"/>
+<link rel="next" href="r-markdown.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">BIO1410-2024</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="introduction-à-r-et-rstudio.html"><a href="introduction-à-r-et-rstudio.html"><i class="fa fa-check"></i><b>2</b> Introduction à R et RStudio</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction-à-r-et-rstudio.html"><a href="introduction-à-r-et-rstudio.html#quest-ce-que-r-et-rstudio"><i class="fa fa-check"></i><b>2.1</b> Qu’est-ce que R et Rstudio</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction-à-r-et-rstudio.html"><a href="introduction-à-r-et-rstudio.html#composants-de-rstudio"><i class="fa fa-check"></i><b>2.2</b> Composants de RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="scripter-avec-rstudio.html"><a href="scripter-avec-rstudio.html"><i class="fa fa-check"></i><b>3</b> Scripter avec RStudio</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="scripter-avec-rstudio.html"><a href="scripter-avec-rstudio.html#créer-un-script"><i class="fa fa-check"></i><b>3.1</b> Créer un script</a></li>
+<li class="chapter" data-level="3.2" data-path="scripter-avec-rstudio.html"><a href="scripter-avec-rstudio.html#répertoire-de-travail"><i class="fa fa-check"></i><b>3.2</b> Répertoire de travail</a></li>
+<li class="chapter" data-level="3.3" data-path="scripter-avec-rstudio.html"><a href="scripter-avec-rstudio.html#importer-un-taleau-de-données"><i class="fa fa-check"></i><b>3.3</b> Importer un taleau de données</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="traitement-des-fastqs.html"><a href="traitement-des-fastqs.html"><i class="fa fa-check"></i><b>4</b> Traitement des fastqs</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="traitement-des-fastqs.html"><a href="traitement-des-fastqs.html#pré-analyse"><i class="fa fa-check"></i><b>4.1</b> Pré-analyse</a></li>
+<li class="chapter" data-level="4.2" data-path="traitement-des-fastqs.html"><a href="traitement-des-fastqs.html#inspecter-la-qualité-filtrer-et-rogner"><i class="fa fa-check"></i><b>4.2</b> Inspecter la qualité, filtrer et rogner</a></li>
+<li class="chapter" data-level="4.3" data-path="traitement-des-fastqs.html"><a href="traitement-des-fastqs.html#retirer-les-erreurs-de-nucléotides"><i class="fa fa-check"></i><b>4.3</b> Retirer les erreurs de nucléotides</a></li>
+<li class="chapter" data-level="4.4" data-path="traitement-des-fastqs.html"><a href="traitement-des-fastqs.html#gnérer-la-matrice-dabondance-dasvs-par-échantillon"><i class="fa fa-check"></i><b>4.4</b> Gnérer la matrice d’abondance d’ASVs par échantillon</a></li>
+<li class="chapter" data-level="4.5" data-path="traitement-des-fastqs.html"><a href="traitement-des-fastqs.html#classification-taxonomique"><i class="fa fa-check"></i><b>4.5</b> Classification taxonomique</a></li>
+<li class="chapter" data-level="4.6" data-path="traitement-des-fastqs.html"><a href="traitement-des-fastqs.html#obtenir-les-séquences-dacides-nucléiques-adn"><i class="fa fa-check"></i><b>4.6</b> Obtenir les séquences d’acides nucléiques (ADN)</a></li>
+<li class="chapter" data-level="4.7" data-path="traitement-des-fastqs.html"><a href="traitement-des-fastqs.html#sauvegarder-les-résultats-en-format-comma-seperated-value-csv"><i class="fa fa-check"></i><b>4.7</b> Sauvegarder les résultats en format comma seperated value (csv)</a></li>
+<li class="chapter" data-level="4.8" data-path="traitement-des-fastqs.html"><a href="traitement-des-fastqs.html#raréfier"><i class="fa fa-check"></i><b>4.8</b> Raréfier</a></li>
+<li class="chapter" data-level="4.9" data-path="traitement-des-fastqs.html"><a href="traitement-des-fastqs.html#sauvegarder-les-résultats-en-format-comma-seperated-value-csv-1"><i class="fa fa-check"></i><b>4.9</b> Sauvegarder les résultats en format comma seperated value (csv)</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="r-markdown.html"><a href="r-markdown.html"><i class="fa fa-check"></i><b>5</b> R Markdown</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="r-markdown.html"><a href="r-markdown.html#utliser-r-markdowm"><i class="fa fa-check"></i><b>5.1</b> Utliser R Markdowm</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="r-markdown.html"><a href="r-markdown.html#bloc-de-codes"><i class="fa fa-check"></i><b>5.1.1</b> Bloc de codes</a></li>
+<li class="chapter" data-level="5.1.2" data-path="r-markdown.html"><a href="r-markdown.html#définir-le-répertoire-de-travail-par-défault"><i class="fa fa-check"></i><b>5.1.2</b> Définir le répertoire de travail par défault</a></li>
+<li class="chapter" data-level="5.1.3" data-path="r-markdown.html"><a href="r-markdown.html#importer-des-données"><i class="fa fa-check"></i><b>5.1.3</b> Importer des données</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="installer-r-et-rstudio.html"><a href="installer-r-et-rstudio.html"><i class="fa fa-check"></i><b>6</b> Installer R et RStudio</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">BIA1401 - 2024 - Introduction à R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="traitement-des-fastqs" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapitre 4</span> Traitement des fastqs<a href="traitement-des-fastqs.html#traitement-des-fastqs" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>DADA2 est un pipeline bio-informatique qui comprend une série d’étapes permettant de filtrer les séquences brutes obtenues par le séquençage d’amplicons. Ultimement, le pipeline permet d’obtenir une matrice d’abondance d’ASVs en fonction des échantillons ainsi que la classification taxonomique des séquences associées aux différents ASVs.</p>
+<p>DADA2 a deux particularités qui le distingue des autres pipeline courament utilisés. D’une part, il procède la à modélisation de l’erreur dûe au séquençage ce qui est censé permettre des distinguer les séquences mutantes, des séquences érronées. D’autre part, contrairement à d’autres pipelines comme QIIME ou Mothur, DADA2 ne regroupe pas les séquences similaires à 97% en Unités Taxonomiques Opérationelles (OTUs). Ses ASVs ne subissent pas de regroupement si les séqences ne sont pas identiques à 100%.</p>
+<div id="pré-analyse" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Pré-analyse<a href="traitement-des-fastqs.html#pré-analyse" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Importer les librairies que nous utilisons pour traiter les données</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="traitement-des-fastqs.html#cb2-1" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb2-2"><a href="traitement-des-fastqs.html#cb2-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb2-3"><a href="traitement-des-fastqs.html#cb2-3" tabindex="-1"></a><span class="fu">library</span>(dada2)</span>
+<span id="cb2-4"><a href="traitement-des-fastqs.html#cb2-4" tabindex="-1"></a><span class="fu">library</span>(phyloseq)</span>
+<span id="cb2-5"><a href="traitement-des-fastqs.html#cb2-5" tabindex="-1"></a><span class="fu">library</span>(DECIPHER)</span></code></pre></div>
+<p>Identifier les échantillons présents dans le dossier de travail et extraire le nom de ces deniers sans les artefacts ajoutés lors du séquençage.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="traitement-des-fastqs.html#cb3-1" tabindex="-1"></a><span class="co"># Créer une variable qui définit le lien vers le dossier contenant tous les fichiers en format fastq</span></span>
+<span id="cb3-2"><a href="traitement-des-fastqs.html#cb3-2" tabindex="-1"></a>path <span class="ot">=</span> <span class="st">&quot;~/BIO1410/2023/raw_fastqs&quot;</span>  </span>
+<span id="cb3-3"><a href="traitement-des-fastqs.html#cb3-3" tabindex="-1"></a><span class="co"># Identifier tous les fichiers fastq du brin Forward</span></span>
+<span id="cb3-4"><a href="traitement-des-fastqs.html#cb3-4" tabindex="-1"></a>fnFs <span class="ot">=</span> <span class="fu">sort</span>(<span class="fu">list.files</span>(path, <span class="at">pattern=</span><span class="st">&quot;_R1_001.fastq&quot;</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)) </span>
+<span id="cb3-5"><a href="traitement-des-fastqs.html#cb3-5" tabindex="-1"></a><span class="co"># Identifier tous les fichiers fastq du brin Reverse</span></span>
+<span id="cb3-6"><a href="traitement-des-fastqs.html#cb3-6" tabindex="-1"></a>fnRs <span class="ot">=</span> <span class="fu">sort</span>(<span class="fu">list.files</span>(path, <span class="at">pattern=</span><span class="st">&quot;_R2_001.fastq&quot;</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)) </span>
+<span id="cb3-7"><a href="traitement-des-fastqs.html#cb3-7" tabindex="-1"></a><span class="co"># Extraire le nom de l&#39;échantillon à partir du nom du fichier en assumant </span></span>
+<span id="cb3-8"><a href="traitement-des-fastqs.html#cb3-8" tabindex="-1"></a><span class="co"># que le format du nom de l&#39;échantillon est le suivant : NOM-ÉCHANTILLON_XXX.fastq.gz</span></span>
+<span id="cb3-9"><a href="traitement-des-fastqs.html#cb3-9" tabindex="-1"></a>sample.names <span class="ot">=</span> <span class="fu">sapply</span>(<span class="fu">strsplit</span>(<span class="fu">basename</span>(fnFs), <span class="st">&quot;_&quot;</span>), <span class="st">`</span><span class="at">[</span><span class="st">`</span>, <span class="dv">1</span>) </span>
+<span id="cb3-10"><a href="traitement-des-fastqs.html#cb3-10" tabindex="-1"></a><span class="co"># Appliquer ce nom sans les artefacts du séquençage à nos variables </span></span>
+<span id="cb3-11"><a href="traitement-des-fastqs.html#cb3-11" tabindex="-1"></a><span class="fu">names</span>(fnFs) <span class="ot">=</span> sample.names </span>
+<span id="cb3-12"><a href="traitement-des-fastqs.html#cb3-12" tabindex="-1"></a><span class="fu">names</span>(fnRs) <span class="ot">=</span> sample.names</span></code></pre></div>
+</div>
+<div id="inspecter-la-qualité-filtrer-et-rogner" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Inspecter la qualité, filtrer et rogner<a href="traitement-des-fastqs.html#inspecter-la-qualité-filtrer-et-rogner" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Inspecter la qualités des séquences</strong></p>
+<p>Afin d’inspecter la qualité des séquences nous utilisons la commande <code>plotQualityProfile</code>. Cette commande représente graphiquement le Q score (axe des Y) associé à chaque nucléotide (axe des X). La médianne est en vert, et les quartiles en orange pointillé. Le Q score est une mesure qui nous renseigne sur la précision du séquençage (voir tableau ci-dessous).</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Q score</th>
+<th align="center">Précision</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">10</td>
+<td align="center">90 %</td>
+</tr>
+<tr class="even">
+<td align="center">20</td>
+<td align="center">99 %</td>
+</tr>
+<tr class="odd">
+<td align="center">30</td>
+<td align="center">99.9 %</td>
+</tr>
+<tr class="even">
+<td align="center">40</td>
+<td align="center">99.9 %</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="traitement-des-fastqs.html#cb4-1" tabindex="-1"></a><span class="fu">plotQualityProfile</span>(fnFs, <span class="at">aggregate =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb4-2"><a href="traitement-des-fastqs.html#cb4-2" tabindex="-1"></a><span class="fu">plotQualityProfile</span>(fnRs, <span class="at">aggregate =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<p><img src="data/plotqualityprofile.png" width="70%" style="display: block; margin: auto;" /></p>
+<p>L’analyse de ces graphiques nous permet donc de choisir les paramètres de filtrage et de rognage de la prochaine étape. La qualité des séquences du brin Forward est généralement de meilleur qualité que celle des séquences du brin Reverse. L’intégralité du brin Forward (250 nucléotides) est d’assez bonnes qualité pour le conserver entier alors que pour le brin Reverse nous supprimerons les nucléotides après la position 240. En observant les graphiques générés, vous pouvesz constater que le début des séquences est aussi de moins bonne qualité et comprend les amorces que nous devons retirer.</p>
+<p><strong>Filtrer et rogner les séquences</strong></p>
+<p>Tout d’abord nous créons un dossier <code>filtered</code> ainsi que les objets <code>filtFs</code> <code>filtRs</code> pour stoquer les séquences filtrées.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="traitement-des-fastqs.html#cb5-1" tabindex="-1"></a>filtFs <span class="ot">=</span> <span class="fu">file.path</span>(path, <span class="st">&quot;filtered&quot;</span>, <span class="fu">paste0</span>(sample.names, <span class="st">&quot;_F_filt.fastq.gz&quot;</span>))</span>
+<span id="cb5-2"><a href="traitement-des-fastqs.html#cb5-2" tabindex="-1"></a>filtRs <span class="ot">=</span> <span class="fu">file.path</span>(path, <span class="st">&quot;filtered&quot;</span>, <span class="fu">paste0</span>(sample.names, <span class="st">&quot;_R_filt.fastq.gz&quot;</span>))</span>
+<span id="cb5-3"><a href="traitement-des-fastqs.html#cb5-3" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="traitement-des-fastqs.html#cb5-4" tabindex="-1"></a><span class="fu">names</span>(filtFs) <span class="ot">=</span> sample.names</span>
+<span id="cb5-5"><a href="traitement-des-fastqs.html#cb5-5" tabindex="-1"></a><span class="fu">names</span>(filtRs) <span class="ot">=</span> sample.names</span></code></pre></div>
+<p>Nous utilisons la fonction <code>filterAndTrim</code> afin de filtrer et rogner les séquences.</p>
+<ul>
+<li>truncQ : définit un l’indice Q score minimale. A la première instance d’un score de qualité inférieur ou égal à truncQ, la séquence est tronquée.</li>
+<li>truncLen : définit à quelle longueur les séquences vont être tronquées. Les séquences plus courtes que la longueur sont éliminées.</li>
+<li>trimLeft : définit la longueur que l’on coupe du côté 5’ des séquences. Cela permet d’enlever les amorces si elles n’ont pas été préalablement retiré.
+<ul>
+<li>799F: AACMGGATTAGATACCCKG = 19 nucléotides /</li>
+<li>1115R: AGGGTTGCGCTCGTTG = 19 nucléotides</li>
+</ul></li>
+<li>maxEE : définit le nombre maximum d’<em>erreurs attendues</em> autorisées dans une lecture. Ce filtre se base sur l’indice Q score. Plus on augmente le chiffre, moins on est strict.</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="traitement-des-fastqs.html#cb6-1" tabindex="-1"></a><span class="co"># Filtrer les séquences </span></span>
+<span id="cb6-2"><a href="traitement-des-fastqs.html#cb6-2" tabindex="-1"></a>out <span class="ot">=</span> <span class="fu">filterAndTrim</span>(fnFs, filtFs, fnRs, filtRs, <span class="at">trimLeft =</span> <span class="fu">c</span>(<span class="dv">19</span>,<span class="dv">16</span>), <span class="at">truncLen=</span><span class="fu">c</span>(<span class="dv">250</span>,<span class="dv">240</span>), </span>
+<span id="cb6-3"><a href="traitement-des-fastqs.html#cb6-3" tabindex="-1"></a>                     <span class="at">maxN=</span><span class="dv">0</span>, <span class="at">maxEE=</span><span class="dv">2</span>, <span class="at">truncQ=</span><span class="dv">2</span>,<span class="at">rm.phix=</span><span class="cn">TRUE</span>, </span>
+<span id="cb6-4"><a href="traitement-des-fastqs.html#cb6-4" tabindex="-1"></a>                     <span class="at">compress=</span><span class="cn">TRUE</span>, <span class="at">multithread=</span><span class="cn">TRUE</span>) </span></code></pre></div>
+</div>
+<div id="retirer-les-erreurs-de-nucléotides" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Retirer les erreurs de nucléotides<a href="traitement-des-fastqs.html#retirer-les-erreurs-de-nucléotides" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Cet étape consiste à estimer le taux d’erreur de séquençage. Son but est de permettre de différencier les séquences mutantes et les séquences érronées.Le modèle d’erreur est calculé en alternant l’estimation des taux d’erreur et l’inférence de la composition de l’échantillon jusqu’à ce qu’ils convergent vers une solution cohérente.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="traitement-des-fastqs.html#cb7-1" tabindex="-1"></a>errF <span class="ot">=</span> <span class="fu">learnErrors</span>(filtFs, <span class="at">multithread=</span><span class="cn">TRUE</span>, <span class="at">randomize=</span><span class="cn">TRUE</span>)</span>
+<span id="cb7-2"><a href="traitement-des-fastqs.html#cb7-2" tabindex="-1"></a>errR <span class="ot">=</span> <span class="fu">learnErrors</span>(filtRs, <span class="at">multithread=</span><span class="cn">TRUE</span>, <span class="at">randomize=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<p>Nous pouvons maintenant appliquer l’algorithme entraîné sur nos séquences afin de retirer les nulcéotides erronés</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="traitement-des-fastqs.html#cb8-1" tabindex="-1"></a>dadaFs <span class="ot">=</span> <span class="fu">dada</span>(filtFs, <span class="at">err =</span> errF, <span class="at">pool =</span> <span class="st">&quot;pseudo&quot;</span>, <span class="at">multithread=</span><span class="cn">TRUE</span>)</span>
+<span id="cb8-2"><a href="traitement-des-fastqs.html#cb8-2" tabindex="-1"></a>dadaRs <span class="ot">=</span> <span class="fu">dada</span>(filtRs, <span class="at">err =</span> errR, <span class="at">pool =</span> <span class="st">&quot;pseudo&quot;</span>, <span class="at">multithread=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+</div>
+<div id="gnérer-la-matrice-dabondance-dasvs-par-échantillon" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Gnérer la matrice d’abondance d’ASVs par échantillon<a href="traitement-des-fastqs.html#gnérer-la-matrice-dabondance-dasvs-par-échantillon" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Tout l’intérêt du séquençage en paire réside dans le but de fusionner les deux brins afin d’accroitre notre confiance en leur fiabilité. La fusion permet également d’obtenir des amplicons plus long.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="traitement-des-fastqs.html#cb9-1" tabindex="-1"></a>mergers <span class="ot">=</span> <span class="fu">mergePairs</span>(dadaFs, filtFs, dadaRs, filtRs)</span></code></pre></div>
+<p>Nous avons enfin notre matrice d’abondance d’ASVs que nous allons stoquer dans l’objet seqtab.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="traitement-des-fastqs.html#cb10-1" tabindex="-1"></a><span class="co"># Construire la table d&#39;ASV avec les séquences combinées  </span></span>
+<span id="cb10-2"><a href="traitement-des-fastqs.html#cb10-2" tabindex="-1"></a>seqtab <span class="ot">=</span> <span class="fu">makeSequenceTable</span>(mergers)</span></code></pre></div>
+<p>L’étape de retrait des chimère vise à éliminer toutes les séquences non biologiques qui sont produites lorsqu’une séquence n’est pas complètement amplifié lors de la PCR et qu’elle s’hybride avec l’amorce lors du prochain cycle.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="traitement-des-fastqs.html#cb11-1" tabindex="-1"></a>seqtab.nochim <span class="ot">=</span> <span class="fu">removeBimeraDenovo</span>(seqtab, <span class="at">method =</span> <span class="st">&quot;consensus&quot;</span>, <span class="at">multithread =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb11-2"><a href="traitement-des-fastqs.html#cb11-2" tabindex="-1"></a><span class="co"># Comparer la dimension de la tables d&#39;ASV avec et sans chimières</span></span>
+<span id="cb11-3"><a href="traitement-des-fastqs.html#cb11-3" tabindex="-1"></a><span class="fu">dim</span>(seqtab.nochim)</span>
+<span id="cb11-4"><a href="traitement-des-fastqs.html#cb11-4" tabindex="-1"></a><span class="fu">sum</span>(seqtab.nochim)<span class="sc">/</span><span class="fu">sum</span>(seqtab)</span></code></pre></div>
+</div>
+<div id="classification-taxonomique" class="section level2 hasAnchor" number="4.5">
+<h2><span class="header-section-number">4.5</span> Classification taxonomique<a href="traitement-des-fastqs.html#classification-taxonomique" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Grâce à l’implémentation de la méthode de classification naïve bayésienne, la fonction <code>assignTaxonomy</code> prend en entrée l’ensemble de séquences à classer ainsi qu’un ensemble de séquences de référence avec une taxonomie connue. Nous utilisons la base de données d’amplicons de Silva.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="traitement-des-fastqs.html#cb12-1" tabindex="-1"></a>taxa <span class="ot">=</span> <span class="fu">assignTaxonomy</span>(seqtab.nochim, <span class="st">&quot;~/16S_Project/silva_nr99_v138.1_train_set.fa.gz&quot;</span>, <span class="at">multithread=</span><span class="cn">TRUE</span>, <span class="at">tryRC=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<p>Comme nous avons plusieurs ASVs non classifié à différents rangs taxonomique, nous allons venir copier le rang taxonomique supérieur suivant du mot “Unclassified” aux ASVs non-classifiés.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="traitement-des-fastqs.html#cb13-1" tabindex="-1"></a>taxid <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">t</span>(taxa))</span>
+<span id="cb13-2"><a href="traitement-des-fastqs.html#cb13-2" tabindex="-1"></a>taxid[] <span class="ot">=</span> <span class="fu">lapply</span>(taxid, as.character)</span>
+<span id="cb13-3"><a href="traitement-des-fastqs.html#cb13-3" tabindex="-1"></a>taxa2 <span class="ot">=</span> tidyr<span class="sc">::</span><span class="fu">fill</span>(taxid, <span class="fu">colnames</span>(taxid),<span class="at">.direction =</span> <span class="st">&quot;down&quot;</span>)</span>
+<span id="cb13-4"><a href="traitement-des-fastqs.html#cb13-4" tabindex="-1"></a>taxa2 <span class="ot">=</span> <span class="fu">sapply</span>(taxa2, <span class="cf">function</span>(x){<span class="fu">paste0</span>(<span class="st">&quot;Unclassified_&quot;</span>, x)})</span>
+<span id="cb13-5"><a href="traitement-des-fastqs.html#cb13-5" tabindex="-1"></a>taxid[<span class="fu">is.na</span>(taxid)] <span class="ot">=</span> taxa2[<span class="fu">is.na</span>(taxid)]</span>
+<span id="cb13-6"><a href="traitement-des-fastqs.html#cb13-6" tabindex="-1"></a>taxid <span class="ot">=</span> <span class="fu">t</span>(taxid)</span>
+<span id="cb13-7"><a href="traitement-des-fastqs.html#cb13-7" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="traitement-des-fastqs.html#cb13-8" tabindex="-1"></a><span class="co"># Retirer les ASVs n&#39;appartenant pas au domaine des Bactéries </span></span>
+<span id="cb13-9"><a href="traitement-des-fastqs.html#cb13-9" tabindex="-1"></a>taxid <span class="ot">=</span> <span class="fu">subset</span>(<span class="fu">as.data.frame</span>(taxid), Kingdom <span class="sc">==</span><span class="st">&quot;Bacteria&quot;</span>)</span>
+<span id="cb13-10"><a href="traitement-des-fastqs.html#cb13-10" tabindex="-1"></a>seqtab.nochim <span class="ot">=</span> seqtab.nochim[,<span class="fu">colnames</span>(seqtab.nochim) <span class="sc">%in%</span> <span class="fu">rownames</span>(taxid)]</span></code></pre></div>
+</div>
+<div id="obtenir-les-séquences-dacides-nucléiques-adn" class="section level2 hasAnchor" number="4.6">
+<h2><span class="header-section-number">4.6</span> Obtenir les séquences d’acides nucléiques (ADN)<a href="traitement-des-fastqs.html#obtenir-les-séquences-dacides-nucléiques-adn" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Nous voulons conserver la séquences d’ADN correspondant à chacun des ASVs afin de pouvoir ultimement utiliser cette séquences avec la base de données BLAST de NCBI.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="traitement-des-fastqs.html#cb14-1" tabindex="-1"></a><span class="co"># Importer le tableau de données des métadonnées </span></span>
+<span id="cb14-2"><a href="traitement-des-fastqs.html#cb14-2" tabindex="-1"></a>meta <span class="ot">=</span> <span class="fu">read.table</span>(<span class="st">&quot;/home/kvilleneuve/16S_Project/BIO1410/metadata.csv&quot;</span>,<span class="at">sep=</span><span class="st">&quot;,&quot;</span>, <span class="at">row.names=</span><span class="dv">1</span>, <span class="at">header=</span><span class="cn">TRUE</span>)</span>
+<span id="cb14-3"><a href="traitement-des-fastqs.html#cb14-3" tabindex="-1"></a><span class="co"># Combiner la matrice d&#39;aboncance, le tableau de métadonnées et la table de taxonomique dans un object de type phyloseq</span></span>
+<span id="cb14-4"><a href="traitement-des-fastqs.html#cb14-4" tabindex="-1"></a>ps <span class="ot">=</span> <span class="fu">phyloseq</span>(<span class="fu">otu_table</span>(<span class="fu">t</span>(seqtab.nochim), <span class="at">taxa_are_rows=</span><span class="cn">TRUE</span>), <span class="fu">tax_table</span>(<span class="fu">as.matrix</span>(taxid)), <span class="fu">sample_data</span>(meta))</span>
+<span id="cb14-5"><a href="traitement-des-fastqs.html#cb14-5" tabindex="-1"></a><span class="co"># On </span></span>
+<span id="cb14-6"><a href="traitement-des-fastqs.html#cb14-6" tabindex="-1"></a>dna <span class="ot">=</span> Biostrings<span class="sc">::</span><span class="fu">DNAStringSet</span>(<span class="fu">taxa_names</span>(ps))</span>
+<span id="cb14-7"><a href="traitement-des-fastqs.html#cb14-7" tabindex="-1"></a><span class="fu">names</span>(dna) <span class="ot">=</span> <span class="fu">taxa_names</span>(ps)</span>
+<span id="cb14-8"><a href="traitement-des-fastqs.html#cb14-8" tabindex="-1"></a>ps1 <span class="ot">=</span> <span class="fu">merge_phyloseq</span>(ps, dna)</span>
+<span id="cb14-9"><a href="traitement-des-fastqs.html#cb14-9" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="traitement-des-fastqs.html#cb14-10" tabindex="-1"></a><span class="fu">taxa_names</span>(ps1) <span class="ot">=</span> <span class="fu">paste0</span>(<span class="st">&quot;ASV&quot;</span>, <span class="fu">seq</span>(<span class="fu">ntaxa</span>(ps1)))</span></code></pre></div>
+</div>
+<div id="sauvegarder-les-résultats-en-format-comma-seperated-value-csv" class="section level2 hasAnchor" number="4.7">
+<h2><span class="header-section-number">4.7</span> Sauvegarder les résultats en format comma seperated value (csv)<a href="traitement-des-fastqs.html#sauvegarder-les-résultats-en-format-comma-seperated-value-csv" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="traitement-des-fastqs.html#cb15-1" tabindex="-1"></a><span class="co"># La matrice d&#39;anbondance d&#39;ASV par échantillon</span></span>
+<span id="cb15-2"><a href="traitement-des-fastqs.html#cb15-2" tabindex="-1"></a><span class="fu">write.csv</span>(seqtab.nochim, <span class="at">file =</span> <span class="st">&quot;~/BIO1410/raw_asv.csv&quot;</span>)</span>
+<span id="cb15-3"><a href="traitement-des-fastqs.html#cb15-3" tabindex="-1"></a><span class="co"># Le tableau de classification taxonomique des ASVs</span></span>
+<span id="cb15-4"><a href="traitement-des-fastqs.html#cb15-4" tabindex="-1"></a><span class="fu">write.csv</span>(taxid, <span class="at">file =</span> <span class="st">&quot;~/BIO1410/raw_sequences.csv&quot;</span>)</span>
+<span id="cb15-5"><a href="traitement-des-fastqs.html#cb15-5" tabindex="-1"></a><span class="co"># Les séquences d&#39;ADN associées à chacun des ASVs</span></span>
+<span id="cb15-6"><a href="traitement-des-fastqs.html#cb15-6" tabindex="-1"></a>ps1 <span class="sc">%&gt;%</span></span>
+<span id="cb15-7"><a href="traitement-des-fastqs.html#cb15-7" tabindex="-1"></a>      <span class="fu">refseq</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb15-8"><a href="traitement-des-fastqs.html#cb15-8" tabindex="-1"></a>      Biostrings<span class="sc">::</span><span class="fu">writeXStringSet</span>(<span class="st">&quot;~/BIO1410/raw_refseq.fna&quot;</span>, <span class="at">append=</span><span class="cn">FALSE</span>,</span>
+<span id="cb15-9"><a href="traitement-des-fastqs.html#cb15-9" tabindex="-1"></a>                                  <span class="at">compress=</span><span class="cn">FALSE</span>, <span class="at">compression_level=</span><span class="cn">NA</span>, <span class="at">format=</span><span class="st">&quot;fasta&quot;</span>)</span></code></pre></div>
+</div>
+<div id="raréfier" class="section level2 hasAnchor" number="4.8">
+<h2><span class="header-section-number">4.8</span> Raréfier<a href="traitement-des-fastqs.html#raréfier" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Retirer les taxons peu abondant</strong>
+Une des raisons pour retirer les taxons peu abondant est de limiter les temps passé à analyser des taxons rarement vus. Cela s’avère généralement une bonne pratique afin de filtrer le “bruit de fond” inutile (taxons qui ne sont en fait que des artefacts du processus de collecte de données).
+Nous élminons ici les taxons dont l’abondance relative est inférieur à 0.005 % tel que recommandé par <em>Bokulich et al., 2013</em></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="traitement-des-fastqs.html#cb16-1" tabindex="-1"></a><span class="co"># Define threshold for low abundant taxa</span></span>
+<span id="cb16-2"><a href="traitement-des-fastqs.html#cb16-2" tabindex="-1"></a>minTotRelAbun <span class="ot">=</span> <span class="fl">5e-5</span></span>
+<span id="cb16-3"><a href="traitement-des-fastqs.html#cb16-3" tabindex="-1"></a><span class="co"># Get total sum for each taxa</span></span>
+<span id="cb16-4"><a href="traitement-des-fastqs.html#cb16-4" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">taxa_sums</span>(ps)</span>
+<span id="cb16-5"><a href="traitement-des-fastqs.html#cb16-5" tabindex="-1"></a><span class="co"># Identify taxa with a total sum greater than the defined threshold</span></span>
+<span id="cb16-6"><a href="traitement-des-fastqs.html#cb16-6" tabindex="-1"></a>keepTaxa <span class="ot">=</span> (x <span class="sc">/</span> <span class="fu">sum</span>(x)) <span class="sc">&gt;</span> minTotRelAbun</span>
+<span id="cb16-7"><a href="traitement-des-fastqs.html#cb16-7" tabindex="-1"></a><span class="co"># Filter out from the phyloseq object any taxa not identified in the keepTaxa object</span></span>
+<span id="cb16-8"><a href="traitement-des-fastqs.html#cb16-8" tabindex="-1"></a>prunedSet <span class="ot">=</span> <span class="fu">prune_taxa</span>(keepTaxa, ps)</span>
+<span id="cb16-9"><a href="traitement-des-fastqs.html#cb16-9" tabindex="-1"></a><span class="co"># View how many taxa were removed by sample </span></span>
+<span id="cb16-10"><a href="traitement-des-fastqs.html#cb16-10" tabindex="-1"></a>loss_taxa<span class="ot">=</span><span class="fu">data.frame</span>(<span class="fu">sample_sums</span>(prunedSet), <span class="fu">sample_sums</span>(ps), (<span class="fu">sample_sums</span>(prunedSet)<span class="sc">-</span><span class="fu">sample_sums</span>(ps)))</span></code></pre></div>
+<p>Nous raréfions ensuite au premier nombre de séquence au-dessus de 1000. Dans note cas cela correspond à 1118.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="traitement-des-fastqs.html#cb17-1" tabindex="-1"></a><span class="co"># Get dataframe of sequences per sample</span></span>
+<span id="cb17-2"><a href="traitement-des-fastqs.html#cb17-2" tabindex="-1"></a>sample_size <span class="ot">=</span> <span class="fu">as.data.frame</span>(<span class="fu">sample_sums</span>(prunedSet))</span>
+<span id="cb17-3"><a href="traitement-des-fastqs.html#cb17-3" tabindex="-1"></a><span class="co"># Filter for the lowest number above 1000 </span></span>
+<span id="cb17-4"><a href="traitement-des-fastqs.html#cb17-4" tabindex="-1"></a>rare_value <span class="ot">=</span> sample_size[<span class="fu">which.max</span>((sample_size[,<span class="dv">1</span>] <span class="sc">&gt;=</span> <span class="dv">1000</span>)<span class="sc">/</span>sample_size[,<span class="dv">1</span>]),]</span>
+<span id="cb17-5"><a href="traitement-des-fastqs.html#cb17-5" tabindex="-1"></a><span class="co"># Rarefy to value identified as rare_value</span></span>
+<span id="cb17-6"><a href="traitement-des-fastqs.html#cb17-6" tabindex="-1"></a>ps_rare <span class="ot">=</span> <span class="fu">rarefy_even_depth</span>(prunedSet, rare_value, <span class="at">rngseed =</span> <span class="dv">112</span>, <span class="at">replace =</span> <span class="cn">FALSE</span>, <span class="at">trimOTUs =</span> <span class="cn">TRUE</span>, <span class="at">verbose =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb17-7"><a href="traitement-des-fastqs.html#cb17-7" tabindex="-1"></a><span class="co"># Confirm rarefaction as a sanity check </span></span>
+<span id="cb17-8"><a href="traitement-des-fastqs.html#cb17-8" tabindex="-1"></a><span class="fu">sample_sums</span>(ps_rare)</span></code></pre></div>
+</div>
+<div id="sauvegarder-les-résultats-en-format-comma-seperated-value-csv-1" class="section level2 hasAnchor" number="4.9">
+<h2><span class="header-section-number">4.9</span> Sauvegarder les résultats en format comma seperated value (csv)<a href="traitement-des-fastqs.html#sauvegarder-les-résultats-en-format-comma-seperated-value-csv-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="traitement-des-fastqs.html#cb18-1" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="fu">as.data.frame</span>(<span class="fu">as</span>(<span class="fu">tax_table</span>(ps_rare), <span class="st">&quot;matrix&quot;</span>)), <span class="at">file =</span> <span class="st">&quot;~/rarefied_taxa.csv&quot;</span>)</span>
+<span id="cb18-2"><a href="traitement-des-fastqs.html#cb18-2" tabindex="-1"></a><span class="fu">write.csv</span>(<span class="fu">as.data.frame</span>(<span class="fu">as</span>(<span class="fu">otu_table</span>(ps_rare), <span class="st">&quot;matrix&quot;</span>)),<span class="at">file =</span> <span class="st">&quot;~/rarefied_asv.csv&quot;</span>)</span></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="scripter-avec-rstudio.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="r-markdown.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/03-DADA2.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

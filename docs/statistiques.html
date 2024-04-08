@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapitre 5 Statistiques | BIO1410 - 2024 - Analyses R</title>
+  <meta name="description" content="Chapitre 5 Statistiques | BIO1410 - 2024 - Analyses R" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapitre 5 Statistiques | BIO1410 - 2024 - Analyses R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapitre 5 Statistiques | BIO1410 - 2024 - Analyses R" />
+  
+  
+  
+
+<meta name="author" content="Karine Villeneuve" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="traitement-des-fastqs.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">BIO1410-2024</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="introduction-à-r-studio-et-r-markdown.html"><a href="introduction-à-r-studio-et-r-markdown.html"><i class="fa fa-check"></i><b>2</b> Introduction à R Studio et R Markdown</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction-à-r-studio-et-r-markdown.html"><a href="introduction-à-r-studio-et-r-markdown.html#pourquoi-utiliser-r-markdown"><i class="fa fa-check"></i><b>2.1</b> Pourquoi utiliser R Markdown</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction-à-r-studio-et-r-markdown.html"><a href="introduction-à-r-studio-et-r-markdown.html#utliser-r-markdowm"><i class="fa fa-check"></i><b>2.2</b> Utliser R Markdowm</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="introduction-à-r-studio-et-r-markdown.html"><a href="introduction-à-r-studio-et-r-markdown.html#bloc-de-codes"><i class="fa fa-check"></i><b>2.2.1</b> Bloc de codes</a></li>
+<li class="chapter" data-level="2.2.2" data-path="introduction-à-r-studio-et-r-markdown.html"><a href="introduction-à-r-studio-et-r-markdown.html#définir-le-répertoire-de-travail-par-défault"><i class="fa fa-check"></i><b>2.2.2</b> Définir le répertoire de travail par défault</a></li>
+<li class="chapter" data-level="2.2.3" data-path="introduction-à-r-studio-et-r-markdown.html"><a href="introduction-à-r-studio-et-r-markdown.html#importer-des-données"><i class="fa fa-check"></i><b>2.2.3</b> Importer des données</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="tableau-de-mes-asvs-et-blast.html"><a href="tableau-de-mes-asvs-et-blast.html"><i class="fa fa-check"></i><b>3</b> Tableau de mes ASVs et BLAST</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="tableau-de-mes-asvs-et-blast.html"><a href="tableau-de-mes-asvs-et-blast.html#scientifiques"><i class="fa fa-check"></i><b>3.1</b> Scientifiques</a></li>
+<li class="chapter" data-level="3.2" data-path="tableau-de-mes-asvs-et-blast.html"><a href="tableau-de-mes-asvs-et-blast.html#obtenir-le-tableau-dabondance-de-mes-asvs-dans-excel"><i class="fa fa-check"></i><b>3.2</b> Obtenir le tableau d’abondance de mes ASVs dans Excel</a></li>
+<li class="chapter" data-level="3.3" data-path="tableau-de-mes-asvs-et-blast.html"><a href="tableau-de-mes-asvs-et-blast.html#blast"><i class="fa fa-check"></i><b>3.3</b> BLAST</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="traitement-des-fastqs.html"><a href="traitement-des-fastqs.html"><i class="fa fa-check"></i><b>4</b> Traitement des fastqs</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="traitement-des-fastqs.html"><a href="traitement-des-fastqs.html#pré-analyse"><i class="fa fa-check"></i><b>4.1</b> Pré-analyse</a></li>
+<li class="chapter" data-level="4.2" data-path="traitement-des-fastqs.html"><a href="traitement-des-fastqs.html#inspecter-la-qualité-filtrer-et-rogner"><i class="fa fa-check"></i><b>4.2</b> Inspecter la qualité, filtrer et rogner</a></li>
+<li class="chapter" data-level="4.3" data-path="traitement-des-fastqs.html"><a href="traitement-des-fastqs.html#retirer-les-erreurs-de-nucléotides"><i class="fa fa-check"></i><b>4.3</b> Retirer les erreurs de nucléotides</a></li>
+<li class="chapter" data-level="4.4" data-path="traitement-des-fastqs.html"><a href="traitement-des-fastqs.html#gnérer-la-matrice-dabondance-dasvs-par-échantillon"><i class="fa fa-check"></i><b>4.4</b> Gnérer la matrice d’abondance d’ASVs par échantillon</a></li>
+<li class="chapter" data-level="4.5" data-path="traitement-des-fastqs.html"><a href="traitement-des-fastqs.html#classification-taxonomique"><i class="fa fa-check"></i><b>4.5</b> Classification taxonomique</a></li>
+<li class="chapter" data-level="4.6" data-path="traitement-des-fastqs.html"><a href="traitement-des-fastqs.html#obtenir-les-séquences-dacides-nucléiques-adn"><i class="fa fa-check"></i><b>4.6</b> Obtenir les séquences d’acides nucléiques (ADN)</a></li>
+<li class="chapter" data-level="4.7" data-path="traitement-des-fastqs.html"><a href="traitement-des-fastqs.html#sauvegarder-les-résultats-en-format-comma-seperated-value-csv"><i class="fa fa-check"></i><b>4.7</b> Sauvegarder les résultats en format comma seperated value (csv)</a></li>
+<li class="chapter" data-level="4.8" data-path="traitement-des-fastqs.html"><a href="traitement-des-fastqs.html#raréfier"><i class="fa fa-check"></i><b>4.8</b> Raréfier</a></li>
+<li class="chapter" data-level="4.9" data-path="traitement-des-fastqs.html"><a href="traitement-des-fastqs.html#sauvegarder-les-résultats-en-format-comma-seperated-value-csv-1"><i class="fa fa-check"></i><b>4.9</b> Sauvegarder les résultats en format comma seperated value (csv)</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="statistiques.html"><a href="statistiques.html"><i class="fa fa-check"></i><b>5</b> Statistiques</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="statistiques.html"><a href="statistiques.html#thème-pour-les-graphiques"><i class="fa fa-check"></i><b>5.1</b> Thème pour les graphiques</a></li>
+<li class="chapter" data-level="5.2" data-path="statistiques.html"><a href="statistiques.html#indice-de-shannon"><i class="fa fa-check"></i><b>5.2</b> Indice de Shannon</a></li>
+<li class="chapter" data-level="5.3" data-path="statistiques.html"><a href="statistiques.html#ordination-pcoa"><i class="fa fa-check"></i><b>5.3</b> Ordination (PCoA)</a></li>
+<li class="chapter" data-level="5.4" data-path="statistiques.html"><a href="statistiques.html#lefse"><i class="fa fa-check"></i><b>5.4</b> LEfSe</a></li>
+<li class="chapter" data-level="5.5" data-path="statistiques.html"><a href="statistiques.html#abondances-relatives"><i class="fa fa-check"></i><b>5.5</b> Abondances relatives</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">BIO1410 - 2024 - Analyses R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="statistiques" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapitre 5</span> Statistiques<a href="statistiques.html#statistiques" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Importer les libraires que nous devons utiliser</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="statistiques.html#cb23-1" tabindex="-1"></a><span class="fu">library</span>(vegan)</span>
+<span id="cb23-2"><a href="statistiques.html#cb23-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb23-3"><a href="statistiques.html#cb23-3" tabindex="-1"></a><span class="fu">library</span>(devtools)</span>
+<span id="cb23-4"><a href="statistiques.html#cb23-4" tabindex="-1"></a><span class="fu">library</span>(forcats) <span class="co"># To reorder our factors (function &quot;fct_relevel&quot;)</span></span>
+<span id="cb23-5"><a href="statistiques.html#cb23-5" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># Dataframe manipulation (notably function &quot;pull&quot;)</span></span>
+<span id="cb23-6"><a href="statistiques.html#cb23-6" tabindex="-1"></a><span class="fu">library</span>(tidyr) <span class="co"># Dataframe manipulation (function &quot;separate&quot;)</span></span>
+<span id="cb23-7"><a href="statistiques.html#cb23-7" tabindex="-1"></a><span class="fu">library</span>(phyloseq) <span class="co"># Very pratical library for the analysis of amplicon data </span></span>
+<span id="cb23-8"><a href="statistiques.html#cb23-8" tabindex="-1"></a><span class="fu">library</span>(randomcoloR) <span class="co"># Generate sets of random colors</span></span>
+<span id="cb23-9"><a href="statistiques.html#cb23-9" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># Generate plots </span></span>
+<span id="cb23-10"><a href="statistiques.html#cb23-10" tabindex="-1"></a><span class="fu">library</span>(stringr) <span class="co"># Makes working with strings as easy as possible (function &quot;str_replace&quot;)</span></span>
+<span id="cb23-11"><a href="statistiques.html#cb23-11" tabindex="-1"></a><span class="fu">library</span>(ggtext) <span class="co"># Allows the use of markdown text (used to make names italic)</span></span>
+<span id="cb23-12"><a href="statistiques.html#cb23-12" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span></code></pre></div>
+<div id="thème-pour-les-graphiques" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Thème pour les graphiques<a href="statistiques.html#thème-pour-les-graphiques" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Je génère mon propre thème pour les différents graphiques à générer dans lequel je spécifie par exemple la taille du texte, la taille des lignes des axes, etc…</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="statistiques.html#cb24-1" tabindex="-1"></a>text_size <span class="ot">=</span> <span class="dv">12</span> </span>
+<span id="cb24-2"><a href="statistiques.html#cb24-2" tabindex="-1"></a>custom_theme <span class="ot">=</span> <span class="cf">function</span>(){ </span>
+<span id="cb24-3"><a href="statistiques.html#cb24-3" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">%+replace%</span> </span>
+<span id="cb24-4"><a href="statistiques.html#cb24-4" tabindex="-1"></a>    <span class="fu">theme</span>(</span>
+<span id="cb24-5"><a href="statistiques.html#cb24-5" tabindex="-1"></a>      <span class="co">#text elements</span></span>
+<span id="cb24-6"><a href="statistiques.html#cb24-6" tabindex="-1"></a>      <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> text_size),                <span class="co">#set font size</span></span>
+<span id="cb24-7"><a href="statistiques.html#cb24-7" tabindex="-1"></a>      <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> text_size),               <span class="co">#font size</span></span>
+<span id="cb24-8"><a href="statistiques.html#cb24-8" tabindex="-1"></a>      <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">size =</span> text_size),               <span class="co">#right align</span></span>
+<span id="cb24-9"><a href="statistiques.html#cb24-9" tabindex="-1"></a>      <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> text_size),               <span class="co">#font size</span></span>
+<span id="cb24-10"><a href="statistiques.html#cb24-10" tabindex="-1"></a>      <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> text_size),                <span class="co">#font size</span></span>
+<span id="cb24-11"><a href="statistiques.html#cb24-11" tabindex="-1"></a>      <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> text_size),</span>
+<span id="cb24-12"><a href="statistiques.html#cb24-12" tabindex="-1"></a>      <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> text_size), </span>
+<span id="cb24-13"><a href="statistiques.html#cb24-13" tabindex="-1"></a>      <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> text_size), </span>
+<span id="cb24-14"><a href="statistiques.html#cb24-14" tabindex="-1"></a>      <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> text_size, <span class="at">hjust=</span><span class="dv">0</span>), </span>
+<span id="cb24-15"><a href="statistiques.html#cb24-15" tabindex="-1"></a>      <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> text_size),</span>
+<span id="cb24-16"><a href="statistiques.html#cb24-16" tabindex="-1"></a>      <span class="at">strip.background =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb24-17"><a href="statistiques.html#cb24-17" tabindex="-1"></a>      <span class="at">panel.border =</span> <span class="fu">element_rect</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">linewidth =</span> <span class="dv">1</span>), </span>
+<span id="cb24-18"><a href="statistiques.html#cb24-18" tabindex="-1"></a>      <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb24-19"><a href="statistiques.html#cb24-19" tabindex="-1"></a>      <span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">linewidth =</span> <span class="fl">0.25</span>, <span class="at">linetype =</span> <span class="st">&#39;solid&#39;</span>, <span class="at">colour =</span> <span class="st">&quot;grey&quot;</span>)</span>
+<span id="cb24-20"><a href="statistiques.html#cb24-20" tabindex="-1"></a>      )</span>
+<span id="cb24-21"><a href="statistiques.html#cb24-21" tabindex="-1"></a>}</span></code></pre></div>
+<p>Importer les fichiers produit par le pipeline DADA2 (incluant la raréfaction)</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="statistiques.html#cb25-1" tabindex="-1"></a>asv <span class="ot">=</span> <span class="fu">read.table</span>(<span class="at">file =</span> <span class="st">&quot;~/rarefied_asv.csv&quot;</span>, <span class="at">sep=</span><span class="st">&quot;,&quot;</span>, <span class="at">row.names=</span><span class="dv">1</span>, <span class="at">header=</span><span class="cn">TRUE</span>, <span class="at">check.names=</span><span class="cn">FALSE</span>) </span>
+<span id="cb25-2"><a href="statistiques.html#cb25-2" tabindex="-1"></a>taxa <span class="ot">=</span> <span class="fu">read.table</span>(<span class="at">file =</span> <span class="st">&quot;~/rarefied_taxa.csv&quot;</span>, <span class="at">sep=</span><span class="st">&quot;,&quot;</span>, <span class="at">row.names=</span><span class="dv">1</span>, <span class="at">header=</span><span class="cn">TRUE</span>) </span>
+<span id="cb25-3"><a href="statistiques.html#cb25-3" tabindex="-1"></a>meta <span class="ot">=</span> <span class="fu">read.table</span>(<span class="at">file =</span> <span class="st">&quot;~/metadata.csv&quot;</span>, <span class="at">sep=</span><span class="st">&quot;,&quot;</span>, <span class="at">row.names=</span><span class="dv">1</span>, <span class="at">header=</span><span class="cn">TRUE</span>) </span>
+<span id="cb25-4"><a href="statistiques.html#cb25-4" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="statistiques.html#cb25-5" tabindex="-1"></a><span class="co"># Insérer le symbole &quot;\n&quot; (signifie saut de line) afin que le texte s&#39;affiche sur deux lignes dans la légende de notre figure   </span></span>
+<span id="cb25-6"><a href="statistiques.html#cb25-6" tabindex="-1"></a>meta<span class="sc">$</span>Region <span class="ot">=</span> <span class="fu">gsub</span>(<span class="st">&quot;Paume de la main dominante&quot;</span>,<span class="st">&quot;Paume de la </span><span class="sc">\n</span><span class="st">main dominante&quot;</span>, meta<span class="sc">$</span>Region)</span>
+<span id="cb25-7"><a href="statistiques.html#cb25-7" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="statistiques.html#cb25-8" tabindex="-1"></a><span class="co"># Combiner les tableaux dans un objet de type phyloseq </span></span>
+<span id="cb25-9"><a href="statistiques.html#cb25-9" tabindex="-1"></a>ps <span class="ot">=</span> <span class="fu">phyloseq</span>(<span class="fu">otu_table</span>(asv, <span class="at">taxa_are_rows =</span> <span class="cn">TRUE</span>), <span class="fu">tax_table</span>(<span class="fu">as.matrix</span>(taxa)), <span class="fu">sample_data</span>(meta))</span></code></pre></div>
+</div>
+<div id="indice-de-shannon" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Indice de Shannon<a href="statistiques.html#indice-de-shannon" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Calculer l’indice de diversité par échantillon</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="statistiques.html#cb26-1" tabindex="-1"></a>shannon <span class="ot">=</span> <span class="fu">cbind</span>(<span class="fu">estimate_richness</span>(ps, <span class="at">measures =</span> <span class="st">&#39;shannon&#39;</span>), <span class="fu">sample_data</span>(ps))</span></code></pre></div>
+<p>Maintenant que nous avons les valeurs de diversité (indice de Shannon) nous aimerions comparer ces valeurs en fonction de la région échantilloné (langue et mains). Pour ce faire, nous pouvons utiliser un test de t de student, mais nous devons avant nous assurer que nos données respectent les postulats de ce test (distribution normale et variance similaire)</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="statistiques.html#cb27-1" tabindex="-1"></a><span class="co"># Est ce que les données ont une distibution gausienne (normale) ? </span></span>
+<span id="cb27-2"><a href="statistiques.html#cb27-2" tabindex="-1"></a>valeur_shapiro<span class="ot">=</span><span class="fu">list</span>() <span class="co"># créer une liste vide </span></span>
+<span id="cb27-3"><a href="statistiques.html#cb27-3" tabindex="-1"></a><span class="co"># Réaliser le test de shapiro pour chacune des régions </span></span>
+<span id="cb27-4"><a href="statistiques.html#cb27-4" tabindex="-1"></a><span class="cf">for</span> (region <span class="cf">in</span> <span class="fu">unique</span>(shannon<span class="sc">$</span>Region)){</span>
+<span id="cb27-5"><a href="statistiques.html#cb27-5" tabindex="-1"></a>    sample <span class="ot">=</span> <span class="fu">subset</span>(shannon, Region <span class="sc">==</span> region)</span>
+<span id="cb27-6"><a href="statistiques.html#cb27-6" tabindex="-1"></a>    ok <span class="ot">=</span> <span class="fu">shapiro.test</span>(sample<span class="sc">$</span>Shannon)</span>
+<span id="cb27-7"><a href="statistiques.html#cb27-7" tabindex="-1"></a>    valeur_shapiro <span class="ot">=</span> <span class="fu">append</span>(valeur_shapiro,ok<span class="sc">$</span>p.value)</span>
+<span id="cb27-8"><a href="statistiques.html#cb27-8" tabindex="-1"></a>}</span>
+<span id="cb27-9"><a href="statistiques.html#cb27-9" tabindex="-1"></a><span class="fu">data.frame</span>(valeur_shapiro) </span>
+<span id="cb27-10"><a href="statistiques.html#cb27-10" tabindex="-1"></a><span class="co"># Pour nos deux régions (langue et mains) la distribution des valeurs de Shannon suit une distribution normale </span></span>
+<span id="cb27-11"><a href="statistiques.html#cb27-11" tabindex="-1"></a></span>
+<span id="cb27-12"><a href="statistiques.html#cb27-12" tabindex="-1"></a><span class="co"># Est ce que la variance est similaire ? </span></span>
+<span id="cb27-13"><a href="statistiques.html#cb27-13" tabindex="-1"></a><span class="co"># Nous pouvons facilement tester la vairance avec la fonction var.test</span></span>
+<span id="cb27-14"><a href="statistiques.html#cb27-14" tabindex="-1"></a><span class="fu">var.test</span>(Shannon <span class="sc">~</span> Region, shannon, </span>
+<span id="cb27-15"><a href="statistiques.html#cb27-15" tabindex="-1"></a>         <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>)</span>
+<span id="cb27-16"><a href="statistiques.html#cb27-16" tabindex="-1"></a><span class="fu">t.test</span>(Shannon <span class="sc">~</span> Region, <span class="at">data =</span> shannon)</span></code></pre></div>
+<p>Nos données respectent les postulats du test de t de Student, nous pouvons donc procéder à l’analyse.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="statistiques.html#cb28-1" tabindex="-1"></a>p <span class="ot">=</span> <span class="fu">ggplot</span>(shannon, <span class="fu">aes</span>(<span class="at">x =</span> Region, <span class="at">y =</span> Shannon, <span class="at">fill =</span> Region)) <span class="sc">+</span> </span>
+<span id="cb28-2"><a href="statistiques.html#cb28-2" tabindex="-1"></a>  <span class="fu">custom_theme</span>() <span class="sc">+</span></span>
+<span id="cb28-3"><a href="statistiques.html#cb28-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb28-4"><a href="statistiques.html#cb28-4" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="fu">aes</span>(<span class="at">color =</span> Region), <span class="at">size =</span> <span class="dv">3</span>, ) <span class="sc">+</span></span>
+<span id="cb28-5"><a href="statistiques.html#cb28-5" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;cornflowerblue&quot;</span>,<span class="st">&quot;palevioletred&quot;</span>)) <span class="sc">+</span> </span>
+<span id="cb28-6"><a href="statistiques.html#cb28-6" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;cornflowerblue&quot;</span>,<span class="st">&quot;palevioletred&quot;</span>))  <span class="sc">+</span> </span>
+<span id="cb28-7"><a href="statistiques.html#cb28-7" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Région&quot;</span>, <span class="at">y =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">&quot;Indice de diversité de Shannon (&quot;</span>, <span class="fu">italic</span>(<span class="st">&quot;H&#39;&quot;</span>), <span class="st">&quot;)&quot;</span>))) <span class="sc">+</span>  </span>
+<span id="cb28-8"><a href="statistiques.html#cb28-8" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">4</span>), <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb28-9"><a href="statistiques.html#cb28-9" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="at">geom =</span><span class="st">&quot;text&quot;</span>, <span class="at">x =</span> <span class="fl">1.5</span>, <span class="at">y =</span> <span class="fl">3.8</span>, <span class="at">label =</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="fu">italic</span>(<span class="st">&quot;p&quot;</span>),<span class="st">&quot; &lt; .001&quot;</span>)), <span class="at">size =</span> <span class="dv">5</span>)</span></code></pre></div>
+</div>
+<div id="ordination-pcoa" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Ordination (PCoA)<a href="statistiques.html#ordination-pcoa" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="statistiques.html#cb29-1" tabindex="-1"></a><span class="co"># Transformer les données d&#39;abondance relative avec l&#39;indice d&#39;Hellinger  </span></span>
+<span id="cb29-2"><a href="statistiques.html#cb29-2" tabindex="-1"></a>asv_hellinger <span class="ot">=</span> <span class="fu">decostand</span>(asv, <span class="at">method =</span> <span class="st">&quot;hellinger&quot;</span>)</span>
+<span id="cb29-3"><a href="statistiques.html#cb29-3" tabindex="-1"></a><span class="co"># On combine les tableaux de donnnées dans un object phyloseq </span></span>
+<span id="cb29-4"><a href="statistiques.html#cb29-4" tabindex="-1"></a>ps <span class="ot">=</span> <span class="fu">phyloseq</span>(<span class="fu">otu_table</span>(asv_hellinger, <span class="at">taxa_are_rows =</span> <span class="cn">TRUE</span>), <span class="fu">tax_table</span>(<span class="fu">as.matrix</span>(taxa)), <span class="fu">sample_data</span>(meta))</span>
+<span id="cb29-5"><a href="statistiques.html#cb29-5" tabindex="-1"></a><span class="co"># Calculer l&#39;indice de distance de Bray-Curtis entre chaque échantillon </span></span>
+<span id="cb29-6"><a href="statistiques.html#cb29-6" tabindex="-1"></a>dist <span class="ot">=</span> <span class="fu">vegdist</span>(<span class="fu">t</span>(asv_hellinger), <span class="at">method =</span> <span class="st">&quot;bray&quot;</span>)</span>
+<span id="cb29-7"><a href="statistiques.html#cb29-7" tabindex="-1"></a><span class="co"># Générer l&#39;ordination avec les fonction R de bases.</span></span>
+<span id="cb29-8"><a href="statistiques.html#cb29-8" tabindex="-1"></a>PCOA <span class="ot">=</span> <span class="fu">cmdscale</span>(dist, <span class="at">eig=</span><span class="cn">TRUE</span>, <span class="at">add=</span><span class="cn">TRUE</span>) </span>
+<span id="cb29-9"><a href="statistiques.html#cb29-9" tabindex="-1"></a><span class="co"># On extrait les coordonnées des points </span></span>
+<span id="cb29-10"><a href="statistiques.html#cb29-10" tabindex="-1"></a>position <span class="ot">=</span> PCOA<span class="sc">$</span>points </span>
+<span id="cb29-11"><a href="statistiques.html#cb29-11" tabindex="-1"></a><span class="co"># Changer le nom des colonnes </span></span>
+<span id="cb29-12"><a href="statistiques.html#cb29-12" tabindex="-1"></a><span class="fu">colnames</span>(position) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Axe.1&quot;</span>, <span class="st">&quot;Axe.2&quot;</span>) </span>
+<span id="cb29-13"><a href="statistiques.html#cb29-13" tabindex="-1"></a><span class="co"># get percentage of variation explained by each axis </span></span>
+<span id="cb29-14"><a href="statistiques.html#cb29-14" tabindex="-1"></a>percent_explained <span class="ot">=</span> <span class="dv">100</span><span class="sc">*</span>PCOA<span class="sc">$</span>eig<span class="sc">/</span><span class="fu">sum</span>(PCOA<span class="sc">$</span>eig) </span>
+<span id="cb29-15"><a href="statistiques.html#cb29-15" tabindex="-1"></a><span class="co"># reduce number of digits (arrondir)</span></span>
+<span id="cb29-16"><a href="statistiques.html#cb29-16" tabindex="-1"></a>reduced_percent <span class="ot">=</span> <span class="fu">format</span>(<span class="fu">round</span>(percent_explained[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>], <span class="at">digits =</span> <span class="dv">2</span>), <span class="at">nsmall =</span> <span class="dv">1</span>, <span class="at">trim =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb29-17"><a href="statistiques.html#cb29-17" tabindex="-1"></a><span class="co"># Generate pretty labels for plot </span></span>
+<span id="cb29-18"><a href="statistiques.html#cb29-18" tabindex="-1"></a>pretty_labs <span class="ot">=</span> <span class="fu">c</span>(<span class="fu">glue</span>(<span class="st">&quot;Axe 1 ({reduced_percent[1]}%)&quot;</span>), <span class="fu">glue</span>(<span class="st">&quot;Axe 2 ({reduced_percent[2]}%)&quot;</span>)) </span>
+<span id="cb29-19"><a href="statistiques.html#cb29-19" tabindex="-1"></a><span class="co"># combine PCOA results with metadata </span></span>
+<span id="cb29-20"><a href="statistiques.html#cb29-20" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">merge</span>(position, meta, <span class="at">by =</span> <span class="dv">0</span>) </span></code></pre></div>
+<p>Générer le graphique</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="statistiques.html#cb30-1" tabindex="-1"></a>plot <span class="ot">=</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x=</span>Axe<span class="fl">.1</span>, <span class="at">y=</span>Axe<span class="fl">.2</span>, <span class="at">color=</span>Region)) <span class="sc">+</span> </span>
+<span id="cb30-2"><a href="statistiques.html#cb30-2" tabindex="-1"></a>  <span class="fu">custom_theme</span>() <span class="sc">+</span></span>
+<span id="cb30-3"><a href="statistiques.html#cb30-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> </span>
+<span id="cb30-4"><a href="statistiques.html#cb30-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> pretty_labs[<span class="dv">1</span>], <span class="at">y =</span> pretty_labs[<span class="dv">2</span>], <span class="at">color =</span> <span class="st">&quot;Région&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb30-5"><a href="statistiques.html#cb30-5" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.50</span>,<span class="fl">0.50</span>), <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb30-6"><a href="statistiques.html#cb30-6" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.5</span>,<span class="fl">0.5</span>), <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)) <span class="sc">+</span> </span>
+<span id="cb30-7"><a href="statistiques.html#cb30-7" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb30-8"><a href="statistiques.html#cb30-8" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">linewidth =</span> <span class="fl">0.2</span>) <span class="sc">+</span> </span>
+<span id="cb30-9"><a href="statistiques.html#cb30-9" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;cornflowerblue&quot;</span>,<span class="st">&quot;palevioletred&quot;</span>)) </span></code></pre></div>
+<p>PERMANOVA et betadisper</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="statistiques.html#cb31-1" tabindex="-1"></a><span class="co"># Calculer la dispersion (distance au centroïde)</span></span>
+<span id="cb31-2"><a href="statistiques.html#cb31-2" tabindex="-1"></a>dispr <span class="ot">=</span> vegan<span class="sc">::</span><span class="fu">betadisper</span>(dist, <span class="at">group =</span> meta<span class="sc">$</span>Region)</span>
+<span id="cb31-3"><a href="statistiques.html#cb31-3" tabindex="-1"></a><span class="fu">boxplot</span>(dispr, <span class="at">main =</span> <span class="st">&quot;&quot;</span>, <span class="at">xlab =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb31-4"><a href="statistiques.html#cb31-4" tabindex="-1"></a><span class="co"># ANOVA sur la dispersion (p = 0.001)</span></span>
+<span id="cb31-5"><a href="statistiques.html#cb31-5" tabindex="-1"></a><span class="fu">permutest</span>(dispr) </span>
+<span id="cb31-6"><a href="statistiques.html#cb31-6" tabindex="-1"></a><span class="co"># ANOVA sur la distance en fonction des région (p = 0.001)</span></span>
+<span id="cb31-7"><a href="statistiques.html#cb31-7" tabindex="-1"></a>adns <span class="ot">=</span> <span class="fu">adonis2</span>(dist <span class="sc">~</span> meta<span class="sc">$</span>Region)</span></code></pre></div>
+</div>
+<div id="lefse" class="section level2 hasAnchor" number="5.4">
+<h2><span class="header-section-number">5.4</span> LEfSe<a href="statistiques.html#lefse" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="statistiques.html#cb32-1" tabindex="-1"></a><span class="co"># Définir le rang taxonomique d&#39;intérêt </span></span>
+<span id="cb32-2"><a href="statistiques.html#cb32-2" tabindex="-1"></a>taxa <span class="ot">=</span> <span class="st">&quot;Genus&quot;</span></span>
+<span id="cb32-3"><a href="statistiques.html#cb32-3" tabindex="-1"></a><span class="co"># On combine les tableaux de données dans un object phyloseq </span></span>
+<span id="cb32-4"><a href="statistiques.html#cb32-4" tabindex="-1"></a>ps <span class="ot">=</span> <span class="fu">phyloseq</span>(<span class="fu">otu_table</span>(asv, <span class="at">taxa_are_rows=</span><span class="cn">TRUE</span>), <span class="fu">tax_table</span>(<span class="fu">as.matrix</span>(taxa)), <span class="fu">sample_data</span>(meta))</span>
+<span id="cb32-5"><a href="statistiques.html#cb32-5" tabindex="-1"></a><span class="co"># Lancer l&#39;analyse LEfSe</span></span>
+<span id="cb32-6"><a href="statistiques.html#cb32-6" tabindex="-1"></a>out_lefse <span class="ot">=</span> <span class="fu">run_lefse</span>(ps, <span class="at">group =</span> <span class="st">&quot;Region&quot;</span>,<span class="at">taxa_rank =</span> taxa)</span>
+<span id="cb32-7"><a href="statistiques.html#cb32-7" tabindex="-1"></a><span class="co"># Extraire les résultats sous forme de tableau</span></span>
+<span id="cb32-8"><a href="statistiques.html#cb32-8" tabindex="-1"></a>df_lefse <span class="ot">=</span> <span class="fu">marker_table</span>(out_lefse) <span class="sc">%&gt;%</span> <span class="fu">data.frame</span>()</span>
+<span id="cb32-9"><a href="statistiques.html#cb32-9" tabindex="-1"></a><span class="co"># Keeping only the 9 taxa with the highest LDA score in each group </span></span>
+<span id="cb32-10"><a href="statistiques.html#cb32-10" tabindex="-1"></a>number_of_taxa <span class="ot">=</span> <span class="dv">5</span> </span>
+<span id="cb32-11"><a href="statistiques.html#cb32-11" tabindex="-1"></a>lda_out <span class="ot">=</span> <span class="fu">list</span>()</span>
+<span id="cb32-12"><a href="statistiques.html#cb32-12" tabindex="-1"></a>i <span class="ot">=</span> <span class="dv">0</span> </span>
+<span id="cb32-13"><a href="statistiques.html#cb32-13" tabindex="-1"></a><span class="cf">for</span> (each_region <span class="cf">in</span> <span class="fu">unique</span>(df_lefse<span class="sc">$</span>enrich_group)){</span>
+<span id="cb32-14"><a href="statistiques.html#cb32-14" tabindex="-1"></a>  i <span class="ot">=</span> i <span class="sc">+</span> <span class="dv">1</span> </span>
+<span id="cb32-15"><a href="statistiques.html#cb32-15" tabindex="-1"></a>  region <span class="ot">=</span> <span class="fu">subset</span>(df_lefse, enrich_group <span class="sc">==</span> each_region)</span>
+<span id="cb32-16"><a href="statistiques.html#cb32-16" tabindex="-1"></a>  top_taxa<span class="ot">=</span><span class="fu">head</span>(region[<span class="fu">order</span>(region<span class="sc">$</span>ef_lda, <span class="at">decreasing=</span> T),], <span class="at">n=</span>number_of_taxa)</span>
+<span id="cb32-17"><a href="statistiques.html#cb32-17" tabindex="-1"></a>  lda_out[[i]] <span class="ot">=</span> top_taxa</span>
+<span id="cb32-18"><a href="statistiques.html#cb32-18" tabindex="-1"></a>}</span>
+<span id="cb32-19"><a href="statistiques.html#cb32-19" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>, lda_out)</span>
+<span id="cb32-20"><a href="statistiques.html#cb32-20" tabindex="-1"></a><span class="co"># Multiplier par -1 les score LDA pour la région sous la langue </span></span>
+<span id="cb32-21"><a href="statistiques.html#cb32-21" tabindex="-1"></a>df<span class="sc">$</span>ef_lda <span class="ot">=</span> <span class="fu">with</span>(df, <span class="fu">ifelse</span>(enrich_group <span class="sc">==</span> <span class="st">&quot;Sous la langue&quot;</span>, <span class="sc">-</span><span class="dv">1</span> <span class="sc">*</span> df<span class="sc">$</span>ef_lda, <span class="dv">1</span><span class="sc">*</span>df<span class="sc">$</span>ef_lda))</span></code></pre></div>
+<p>Générer le graphique</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="statistiques.html#cb33-1" tabindex="-1"></a>p <span class="ot">=</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> ef_lda, <span class="at">y =</span> <span class="fu">reorder</span>(feature, ef_lda), <span class="at">fill =</span> enrich_group)) <span class="sc">+</span> </span>
+<span id="cb33-2"><a href="statistiques.html#cb33-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">width =</span> <span class="fl">0.7</span>, <span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb33-3"><a href="statistiques.html#cb33-3" tabindex="-1"></a>  <span class="fu">custom_theme</span>() <span class="sc">+</span> </span>
+<span id="cb33-4"><a href="statistiques.html#cb33-4" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="at">rows =</span> <span class="fu">vars</span>(enrich_group), <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>, <span class="at">space =</span> <span class="st">&quot;free_y&quot;</span>) <span class="sc">+</span></span>
+<span id="cb33-5"><a href="statistiques.html#cb33-5" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>, </span>
+<span id="cb33-6"><a href="statistiques.html#cb33-6" tabindex="-1"></a>          <span class="at">strip.text.y =</span> <span class="fu">element_text</span>(<span class="at">angle =</span>)) <span class="sc">+</span></span>
+<span id="cb33-7"><a href="statistiques.html#cb33-7" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">limits=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">6</span>,<span class="dv">6</span>), <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>)) <span class="sc">+</span></span>
+<span id="cb33-8"><a href="statistiques.html#cb33-8" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Score LDA&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Genre&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb33-9"><a href="statistiques.html#cb33-9" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;cornflowerblue&quot;</span>,<span class="st">&quot;palevioletred&quot;</span>)) <span class="sc">+</span> </span>
+<span id="cb33-10"><a href="statistiques.html#cb33-10" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linewidth =</span> <span class="fl">0.25</span>, <span class="at">colour=</span><span class="st">&quot;black&quot;</span>) </span></code></pre></div>
+</div>
+<div id="abondances-relatives" class="section level2 hasAnchor" number="5.5">
+<h2><span class="header-section-number">5.5</span> Abondances relatives<a href="statistiques.html#abondances-relatives" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="statistiques.html#cb34-1" tabindex="-1"></a><span class="co"># Defining the number of most abundant taxa to keep</span></span>
+<span id="cb34-2"><a href="statistiques.html#cb34-2" tabindex="-1"></a>number_of_taxa <span class="ot">=</span> <span class="dv">3</span></span>
+<span id="cb34-3"><a href="statistiques.html#cb34-3" tabindex="-1"></a>ps_rel_abund<span class="ot">=</span><span class="fu">transform_sample_counts</span>(ps, <span class="cf">function</span>(x) x<span class="sc">/</span><span class="fu">sum</span>(x)) </span>
+<span id="cb34-4"><a href="statistiques.html#cb34-4" tabindex="-1"></a>ps_glom <span class="ot">=</span> <span class="fu">tax_glom</span>(ps_rel_abund, <span class="at">taxrank =</span> taxa_rank) </span>
+<span id="cb34-5"><a href="statistiques.html#cb34-5" tabindex="-1"></a>melted_df <span class="ot">=</span> <span class="fu">psmelt</span>(ps_glom)</span>
+<span id="cb34-6"><a href="statistiques.html#cb34-6" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="statistiques.html#cb34-7" tabindex="-1"></a><span class="co"># Create an empty list that we will populated with the unique taxa of each sample</span></span>
+<span id="cb34-8"><a href="statistiques.html#cb34-8" tabindex="-1"></a>list_of_all_taxonomic_rank<span class="ot">=</span> <span class="fu">list</span>() </span>
+<span id="cb34-9"><a href="statistiques.html#cb34-9" tabindex="-1"></a>i <span class="ot">=</span> <span class="dv">0</span> </span>
+<span id="cb34-10"><a href="statistiques.html#cb34-10" tabindex="-1"></a><span class="co"># Beginning of the for loop</span></span>
+<span id="cb34-11"><a href="statistiques.html#cb34-11" tabindex="-1"></a><span class="cf">for</span> (each_sample <span class="cf">in</span> <span class="fu">unique</span>(melted_df<span class="sc">$</span>Sample)){</span>
+<span id="cb34-12"><a href="statistiques.html#cb34-12" tabindex="-1"></a>    i <span class="ot">=</span> i <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb34-13"><a href="statistiques.html#cb34-13" tabindex="-1"></a>    sample <span class="ot">=</span> <span class="fu">subset</span>(melted_df, Sample <span class="sc">==</span> each_sample) <span class="co"># Create a new dataframe from the iterator (sample). </span></span>
+<span id="cb34-14"><a href="statistiques.html#cb34-14" tabindex="-1"></a>    total_abundance <span class="ot">=</span> <span class="fu">aggregate</span>(sample<span class="sc">$</span>Abundance, <span class="at">by =</span> <span class="fu">list</span>(<span class="at">taxa_rank =</span> sample[[taxa_rank]]), <span class="at">FUN =</span> sum) <span class="co"># Combine together the same taxa and sum the abundances </span></span>
+<span id="cb34-15"><a href="statistiques.html#cb34-15" tabindex="-1"></a>    top <span class="ot">=</span> <span class="fu">head</span>(total_abundance[<span class="fu">order</span>(total_abundance<span class="sc">$</span>x, <span class="at">decreasing=</span> T),], <span class="at">n =</span> number_of_taxa) <span class="co"># Sort by abundance and keep only the X number of taxa defined by variable number_of_taxa</span></span>
+<span id="cb34-16"><a href="statistiques.html#cb34-16" tabindex="-1"></a>    others_df <span class="ot">=</span> sample[<span class="sc">!</span>sample[[taxa_rank]] <span class="sc">%in%</span> top<span class="sc">$</span>taxa_rank,] <span class="co"># Extract in a new dataframe all taxa that are not present in the dataframe `top`</span></span>
+<span id="cb34-17"><a href="statistiques.html#cb34-17" tabindex="-1"></a>    others_list <span class="ot">=</span> <span class="fu">pull</span>(others_df, taxa_rank) <span class="co"># Create a list by pulling all the values from the column corresponding to the taxa_rank into a list</span></span>
+<span id="cb34-18"><a href="statistiques.html#cb34-18" tabindex="-1"></a>    sample[sample[[taxa_rank]]<span class="sc">%in%</span> others_list,][[taxa_rank]] <span class="ot">=</span> <span class="st">&quot;Others&quot;</span> <span class="co"># In the dataframe `sample` rename all the taxa from the list `others_list` as `Others`</span></span>
+<span id="cb34-19"><a href="statistiques.html#cb34-19" tabindex="-1"></a>    list_of_all_taxonomic_rank[[i]] <span class="ot">=</span> sample <span class="co">#save this dataframe in our list </span></span>
+<span id="cb34-20"><a href="statistiques.html#cb34-20" tabindex="-1"></a>}</span>
+<span id="cb34-21"><a href="statistiques.html#cb34-21" tabindex="-1"></a>df <span class="ot">=</span> <span class="fu">do.call</span>(<span class="st">&quot;rbind&quot;</span>,list_of_all_taxonomic_rank) <span class="co"># combine all the dataframe from the list into one dataframe</span></span>
+<span id="cb34-22"><a href="statistiques.html#cb34-22" tabindex="-1"></a>unique_taxon <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">unique</span>(df[[taxa_rank]])) <span class="co"># create dataframe with the unique names of taxa </span></span>
+<span id="cb34-23"><a href="statistiques.html#cb34-23" tabindex="-1"></a>name <span class="ot">=</span> <span class="fu">colnames</span>(unique_taxon) <span class="co"># extract the name of the column in order to rename the column with the following line </span></span>
+<span id="cb34-24"><a href="statistiques.html#cb34-24" tabindex="-1"></a><span class="fu">names</span>(unique_taxon)[<span class="fu">names</span>(unique_taxon) <span class="sc">==</span> name] <span class="ot">=</span> <span class="fu">as.character</span>(taxa_rank) <span class="co"># Rename the column to the taxa rank defined earlier </span></span>
+<span id="cb34-25"><a href="statistiques.html#cb34-25" tabindex="-1"></a></span>
+<span id="cb34-26"><a href="statistiques.html#cb34-26" tabindex="-1"></a><span class="co"># get the total number of unique most abundant taxa </span></span>
+<span id="cb34-27"><a href="statistiques.html#cb34-27" tabindex="-1"></a>n <span class="ot">=</span> <span class="fu">nrow</span>(unique_taxon) </span>
+<span id="cb34-28"><a href="statistiques.html#cb34-28" tabindex="-1"></a><span class="co"># generate a set of X unique colors corresponding to the number of unique taxa</span></span>
+<span id="cb34-29"><a href="statistiques.html#cb34-29" tabindex="-1"></a>palette <span class="ot">=</span> <span class="fu">distinctColorPalette</span>(n)</span>
+<span id="cb34-30"><a href="statistiques.html#cb34-30" tabindex="-1"></a>unique_taxon[[taxa_rank]] <span class="ot">=</span> <span class="fu">factor</span>(unique_taxon[[taxa_rank]])</span>
+<span id="cb34-31"><a href="statistiques.html#cb34-31" tabindex="-1"></a><span class="fu">names</span>(palette) <span class="ot">=</span> <span class="fu">levels</span>(unique_taxon[[taxa_rank]])</span>
+<span id="cb34-32"><a href="statistiques.html#cb34-32" tabindex="-1"></a><span class="co"># assign gray to category &quot;Others&quot;. The same nomenclature can be use to manually change certain colors.</span></span>
+<span id="cb34-33"><a href="statistiques.html#cb34-33" tabindex="-1"></a>palette[[<span class="st">&quot;Others&quot;</span>]] <span class="ot">=</span> <span class="st">&quot;#E1E1E1&quot;</span></span>
+<span id="cb34-34"><a href="statistiques.html#cb34-34" tabindex="-1"></a></span>
+<span id="cb34-35"><a href="statistiques.html#cb34-35" tabindex="-1"></a><span class="co">#  recreate palette with markdown to italicize name and remove the underscore after Unclassified</span></span>
+<span id="cb34-36"><a href="statistiques.html#cb34-36" tabindex="-1"></a>all_names <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="fu">names</span>(palette))</span>
+<span id="cb34-37"><a href="statistiques.html#cb34-37" tabindex="-1"></a>names_markdown <span class="ot">=</span> all_names <span class="sc">%&gt;%</span></span>
+<span id="cb34-38"><a href="statistiques.html#cb34-38" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">names.palette. =</span> <span class="fu">str_replace</span>(names.palette., <span class="st">&quot;(.*)&quot;</span>,<span class="st">&quot;*</span><span class="sc">\\</span><span class="st">1*&quot;</span>), <span class="co"># Adding asterisk at beginning and end of every taxa</span></span>
+<span id="cb34-39"><a href="statistiques.html#cb34-39" tabindex="-1"></a>         <span class="at">names.palette. =</span> <span class="fu">str_replace</span>(names.palette., <span class="st">&quot;</span><span class="sc">\\</span><span class="st">*Unclassified_(.*)</span><span class="sc">\\</span><span class="st">*&quot;</span>,<span class="st">&quot;Unclassified *</span><span class="sc">\\</span><span class="st">1*&quot;</span>), <span class="co"># Removing the asterisk for words that don&#39;t need to be italicize (Unclassified and Others)</span></span>
+<span id="cb34-40"><a href="statistiques.html#cb34-40" tabindex="-1"></a>         <span class="at">names.palette. =</span> <span class="fu">str_replace</span>(names.palette., <span class="st">&quot;</span><span class="sc">\\</span><span class="st">*Others</span><span class="sc">\\</span><span class="st">*&quot;</span>, <span class="st">&quot;Others&quot;</span>))</span>
+<span id="cb34-41"><a href="statistiques.html#cb34-41" tabindex="-1"></a>list_names<span class="ot">=</span><span class="fu">as.vector</span>(names_markdown<span class="sc">$</span>names.palette.)</span>
+<span id="cb34-42"><a href="statistiques.html#cb34-42" tabindex="-1"></a><span class="co"># Replace names of object</span></span>
+<span id="cb34-43"><a href="statistiques.html#cb34-43" tabindex="-1"></a><span class="fu">names</span>(palette) <span class="ot">=</span> <span class="fu">c</span>(list_names)</span>
+<span id="cb34-44"><a href="statistiques.html#cb34-44" tabindex="-1"></a></span>
+<span id="cb34-45"><a href="statistiques.html#cb34-45" tabindex="-1"></a><span class="co"># Making the same modification to the taxa name from the legend to the taxa names in the dataframe</span></span>
+<span id="cb34-46"><a href="statistiques.html#cb34-46" tabindex="-1"></a>df[[taxa_rank]] <span class="ot">=</span> <span class="fu">str_replace</span>(df[[taxa_rank]], <span class="st">&quot;(.*)&quot;</span>,<span class="st">&quot;*</span><span class="sc">\\</span><span class="st">1*&quot;</span>)</span>
+<span id="cb34-47"><a href="statistiques.html#cb34-47" tabindex="-1"></a>df[[taxa_rank]] <span class="ot">=</span> <span class="fu">str_replace</span>(df[[taxa_rank]], <span class="st">&quot;</span><span class="sc">\\</span><span class="st">*Unclassified_(.*)</span><span class="sc">\\</span><span class="st">*&quot;</span>,<span class="st">&quot;Unclassified *</span><span class="sc">\\</span><span class="st">1*&quot;</span>)</span>
+<span id="cb34-48"><a href="statistiques.html#cb34-48" tabindex="-1"></a>df[[taxa_rank]] <span class="ot">=</span> <span class="fu">str_replace</span>(df[[taxa_rank]], <span class="st">&quot;</span><span class="sc">\\</span><span class="st">*Others</span><span class="sc">\\</span><span class="st">*&quot;</span>, <span class="st">&quot;Others&quot;</span>)</span>
+<span id="cb34-49"><a href="statistiques.html#cb34-49" tabindex="-1"></a></span>
+<span id="cb34-50"><a href="statistiques.html#cb34-50" tabindex="-1"></a><span class="co"># Ordering the legend in alphabetical order</span></span>
+<span id="cb34-51"><a href="statistiques.html#cb34-51" tabindex="-1"></a>legend_raw <span class="ot">=</span> <span class="fu">unique</span>(df[[taxa_rank]]) <span class="co">#Extract legend as text</span></span>
+<span id="cb34-52"><a href="statistiques.html#cb34-52" tabindex="-1"></a>ordered_legend <span class="ot">=</span> <span class="fu">sort</span>(legend_raw) <span class="co"># order alphabetically</span></span>
+<span id="cb34-53"><a href="statistiques.html#cb34-53" tabindex="-1"></a>reordered_legend <span class="ot">=</span> <span class="fu">fct_relevel</span>(ordered_legend, <span class="st">&quot;Others&quot;</span>) <span class="co"># move &quot;Others&quot; to the beginning</span></span>
+<span id="cb34-54"><a href="statistiques.html#cb34-54" tabindex="-1"></a>final_legend <span class="ot">=</span> <span class="fu">levels</span>(reordered_legend) <span class="co"># Extract the levels in a new object</span></span>
+<span id="cb34-55"><a href="statistiques.html#cb34-55" tabindex="-1"></a></span>
+<span id="cb34-56"><a href="statistiques.html#cb34-56" tabindex="-1"></a>my_scale <span class="ot">=</span> <span class="fu">scale_fill_manual</span>(<span class="at">name =</span> <span class="fu">as.character</span>(taxa_rank), <span class="at">breaks =</span> <span class="fu">paste</span>(final_legend), <span class="at">values =</span> palette, <span class="at">na.translate=</span><span class="cn">FALSE</span>, <span class="at">drop=</span><span class="cn">TRUE</span>, <span class="at">limits =</span> force)</span>
+<span id="cb34-57"><a href="statistiques.html#cb34-57" tabindex="-1"></a></span>
+<span id="cb34-58"><a href="statistiques.html#cb34-58" tabindex="-1"></a>p <span class="ot">=</span> <span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> Scientifque, <span class="at">weight =</span> Abundance, <span class="at">fill =</span> <span class="fu">fct_reorder</span>(.data[[taxa_rank]],Abundance,<span class="at">.desc=</span><span class="cn">FALSE</span>))) <span class="sc">+</span> <span class="co"># .data is very important to force the evaluation of the input variables (taxonomic_rank)</span></span>
+<span id="cb34-59"><a href="statistiques.html#cb34-59" tabindex="-1"></a>    <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb34-60"><a href="statistiques.html#cb34-60" tabindex="-1"></a>    <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb34-61"><a href="statistiques.html#cb34-61" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">y =</span><span class="st">&#39;Abondance relative&#39;</span>, <span class="at">x=</span><span class="st">&quot;Scientifque&quot;</span>) <span class="sc">+</span></span>
+<span id="cb34-62"><a href="statistiques.html#cb34-62" tabindex="-1"></a>    <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb34-63"><a href="statistiques.html#cb34-63" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span> Region, <span class="at">ncol=</span><span class="dv">2</span>, <span class="at">strip.position=</span><span class="st">&quot;top&quot;</span>,<span class="at">scales=</span><span class="st">&#39;free_x&#39;</span>) <span class="sc">+</span> </span>
+<span id="cb34-64"><a href="statistiques.html#cb34-64" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> text_size),</span>
+<span id="cb34-65"><a href="statistiques.html#cb34-65" tabindex="-1"></a>          <span class="at">panel.spacing =</span> <span class="fu">unit</span>(<span class="dv">2</span>, <span class="st">&quot;lines&quot;</span>),</span>
+<span id="cb34-66"><a href="statistiques.html#cb34-66" tabindex="-1"></a>          <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span><span class="fl">0.5</span>, <span class="at">size=</span>text_size),</span>
+<span id="cb34-67"><a href="statistiques.html#cb34-67" tabindex="-1"></a>          <span class="at">axis.title=</span><span class="fu">element_text</span>(<span class="at">size=</span>text_size),</span>
+<span id="cb34-68"><a href="statistiques.html#cb34-68" tabindex="-1"></a>          <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">size=</span>text_size, <span class="at">hjust=</span><span class="fl">0.6</span>), </span>
+<span id="cb34-69"><a href="statistiques.html#cb34-69" tabindex="-1"></a>          <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size=</span>text_size, <span class="at">vjust=</span><span class="fl">0.5</span>),</span>
+<span id="cb34-70"><a href="statistiques.html#cb34-70" tabindex="-1"></a>          <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>,</span>
+<span id="cb34-71"><a href="statistiques.html#cb34-71" tabindex="-1"></a>          <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> text_size),</span>
+<span id="cb34-72"><a href="statistiques.html#cb34-72" tabindex="-1"></a>          <span class="at">legend.text =</span> <span class="fu">element_markdown</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb34-73"><a href="statistiques.html#cb34-73" tabindex="-1"></a>          <span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="fl">0.5</span>, <span class="st">&#39;cm&#39;</span>),</span>
+<span id="cb34-74"><a href="statistiques.html#cb34-74" tabindex="-1"></a>          <span class="at">legend.margin =</span> <span class="fu">margin</span>(), <span class="co"># pre-emptively set zero margins </span></span>
+<span id="cb34-75"><a href="statistiques.html#cb34-75" tabindex="-1"></a>          <span class="at">strip.background =</span> <span class="fu">element_blank</span>(), </span>
+<span id="cb34-76"><a href="statistiques.html#cb34-76" tabindex="-1"></a>          <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> text_size)) <span class="sc">+</span> <span class="co"># remove facet_grid box background </span></span>
+<span id="cb34-77"><a href="statistiques.html#cb34-77" tabindex="-1"></a>    my_scale <span class="sc">+</span> <span class="co"># Load our color palette </span></span>
+<span id="cb34-78"><a href="statistiques.html#cb34-78" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">by =</span> <span class="fl">0.5</span>), <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;0&quot;</span>, <span class="st">&quot;0.5&quot;</span>, <span class="st">&quot;1&quot;</span>)) <span class="sc">+</span> <span class="co"># Remove the white space </span></span>
+<span id="cb34-79"><a href="statistiques.html#cb34-79" tabindex="-1"></a>  <span class="co"># Adjusting the legend, notably the number of rows and position</span></span>
+<span id="cb34-80"><a href="statistiques.html#cb34-80" tabindex="-1"></a>    <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">nrow =</span> <span class="dv">8</span>, <span class="at">title =</span> <span class="st">&quot;Genre&quot;</span>, <span class="at">title.position =</span> <span class="st">&quot;top&quot;</span>, <span class="at">title.hjust =</span> <span class="fl">0.5</span>, <span class="at">reverse=</span><span class="cn">FALSE</span>)) </span></code></pre></div>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="traitement-des-fastqs.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/04-Statistique.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
