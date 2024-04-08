@@ -11,7 +11,11 @@ github-repo: rstudio/bookdown-demo
 
 ## Excercice 1 - Genérer un heat map avec toutes les bactéries 
 
-Première étape : Vérifier le répertoire de travail et le modifier si nécessaire. Attention, assurez vous que le fichier s'y trouve bien. 
+Télécharger le fichier `metabolic.csv` que vous trouverez dans le dossier Labo 4 de Moodle. 
+
+Une fois télécharger, ouvrez R Studio et créer un nouveau script. Vérifier ensuite le répertoire de travail et assurez-vous que le fichier `metabolic.csv` s'y trouve (rappelez vous des commandes présentées au dernière laboratoire). 
+
+**Charger et installer les librairies**
 
 Ce sript requiert l'utilisation des librairies suivantes. Il est fort probable que certaine de ces libraires ne soient pas instllées par défault, vous devrez donc utiliser l'onglet `Packages` afin de les installer. 
 
@@ -22,13 +26,17 @@ library(ggplot2)
 library(scales) 
 ```
 
-Vous pouvez maintenant importer la table de données `metabolic.csv` avec la fonction suivante : 
+**Importer le fichier**
+
+Vous pouvez maintenant importer la table de données `metabolic.csv` dans R avec la fonction `read.table`
 
 ```{r, eval= FALSE}
 data = read.table("metabolic.csv", sep=",", header=TRUE, check.names=FALSE)
 ``` 
 
-Afin de procéder à l'analyse nous devons restructer ce tableau de données en utilisant la fonction `metl`. 
+**Manipulation des données**
+
+Afin de générer le heat map nous devons restructurer le tableau de données. Pour ce faire nous utiliserons la fonction `metl`. 
 
 ```{r, eval= FALSE}
 melted_df = melt(data)
@@ -57,7 +65,9 @@ Finalement nous allons transformer nos valeurs en pourcentage. Cela nous permett
 summarized_df$Prop = summarized_df$Somme / summarized_df$Compte * 100
 ```
 
-Nous pouvons maintenant générer le graphique pour représenter les données. 
+**Générer la figure**
+
+Nous pouvons maintenant générer la figure de type heat map pour représenter les données. 
 
 ```{r, eval= FALSE}
 heatmap_tous = ggplot(summarized_df, aes(x = variable, y = Module, fill = Prop)) +
@@ -85,7 +95,7 @@ heatmap_tous = ggplot(summarized_df, aes(x = variable, y = Module, fill = Prop))
         strip.background = element_blank())
 ```
 
-Nous vous invitons à rechercher sur internet ce que fait chacun des paramètres et fonctions que nous utilisons avec la fonction ggplot(). On ne sait jamais, peut-être aurez vous à utiliser ces fonctions dans un future proche... Vous pouvez ensuite utiliser le symbole qui indique à R les commentaires pour annoter les fonctions et paramètres avec l'information que vous avez trouvé. Utilisez ensuite la fonction `ggsave()` pour enregistrer la figure produite. 
+Nous vous invitons à rechercher sur internet ce que fait chacun des paramètres et fonctions que nous utilisons avec la fonction `ggplot()`. On ne sait jamais, peut-être aurez vous à utiliser ces fonctions dans un future proche... Vous pouvez ensuite utiliser le symbole qui indique à R les commentaires pour annoter les fonctions et paramètres avec l'information que vous avez trouvé. Utilisez ensuite la fonction `ggsave()` pour enregistrer la figure produite. 
 
 ```{r, eval= FALSE}
 ggsave(filename = "heat_map_all.png", plot = heatmap_tous, width = 10, height = 10, units = "in", dpi = 500)
@@ -93,7 +103,7 @@ ggsave(filename = "heat_map_all.png", plot = heatmap_tous, width = 10, height = 
 
 ## Excercice 2 - Générer le même heatmap mais avec uniquement vos trois inconnus 
 
-Nous avons vue au dernier laboratoire l'utilisation de la fonction `subset()` pour extraire uniquement certaines données définis d'un tableau de données. Effectuez une recherche internet afin de trouver comment utiliser cette fonction pour extraire vos trois inconnus du tableau de données `melted_df`. Vous devez ensuite rouler de nouveau chacune des commandes avec ce nouveau tableau de données pour obtenir un heat map avec uniquement vos trois inconnus. Cette figure est à inclure dans votre rapport de laboratoire. 
+Nous avons vue au dernier laboratoire l'utilisation de la fonction `subset()` pour extraire uniquement certaines données définies d'un tableau de données. Effectuez une recherche internet afin de trouver comment utiliser cette fonction pour extraire vos trois inconnus du tableau de données `melted_df`. Vous devez ensuite rouler de nouveau chacune des commandes suivantes avec ce nouveau tableau de données pour obtenir un heat map avec uniquement vos trois inconnus. Cette figure est à inclure dans votre rapport de laboratoire. 
 
 Bonne chance ! 
 

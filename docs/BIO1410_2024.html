@@ -165,15 +165,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="excercice-1---genérer-un-heat-map-avec-toutes-les-bactéries" class="section level2 hasAnchor" number="0.1">
 <h2><span class="header-section-number">0.1</span> Excercice 1 - Genérer un heat map avec toutes les bactéries<a href="#excercice-1---genérer-un-heat-map-avec-toutes-les-bactéries" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Première étape : Vérifier le répertoire de travail et le modifier si nécessaire. Attention, assurez vous que le fichier s’y trouve bien.</p>
+<p>Télécharger le fichier <code>metabolic.csv</code> que vous trouverez dans le dossier Labo 4 de Moodle.</p>
+<p>Une fois télécharger, ouvrez R Studio et créer un nouveau script. Vérifier ensuite le répertoire de travail et assurez-vous que le fichier <code>metabolic.csv</code> s’y trouve (rappelez vous des commandes présentées au dernière laboratoire).</p>
+<p><strong>Charger et installer les librairies</strong></p>
 <p>Ce sript requiert l’utilisation des librairies suivantes. Il est fort probable que certaine de ces libraires ne soient pas instllées par défault, vous devrez donc utiliser l’onglet <code>Packages</code> afin de les installer.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(reshape2) </span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="fu">library</span>(scales) </span></code></pre></div>
-<p>Vous pouvez maintenant importer la table de données <code>metabolic.csv</code> avec la fonction suivante :</p>
+<p><strong>Importer le fichier</strong></p>
+<p>Vous pouvez maintenant importer la table de données <code>metabolic.csv</code> dans R avec la fonction <code>read.table</code></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">read.table</span>(<span class="st">&quot;metabolic.csv&quot;</span>, <span class="at">sep=</span><span class="st">&quot;,&quot;</span>, <span class="at">header=</span><span class="cn">TRUE</span>, <span class="at">check.names=</span><span class="cn">FALSE</span>)</span></code></pre></div>
-<p>Afin de procéder à l’analyse nous devons restructer ce tableau de données en utilisant la fonction <code>metl</code>.</p>
+<p><strong>Manipulation des données</strong></p>
+<p>Afin de générer le heat map nous devons restructurer le tableau de données. Pour ce faire nous utiliserons la fonction <code>metl</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>melted_df <span class="ot">=</span> <span class="fu">melt</span>(data)</span></code></pre></div>
 <p>Je vous encourage maintenant à ouvrir ce tableau en cliquant sur celui-ci dans votre environnement et de comparer la disposition des données avec notre tableau original.</p>
 <p>Nous allons ensuite utiliser des fonctions de la librairies <a href="https://dplyr.tidyverse.org/">dplyr</a> afin de transformer nos données.</p>
@@ -190,7 +194,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div>
 <p>Finalement nous allons transformer nos valeurs en pourcentage. Cela nous permettra d’évaluer si vos bactéries possèdes l’ensemble des gènes associées à chacun des modules des différentes voies métaboliques. Pour ce faire nous divisons les valeurs de la colonne <code>Somme</code> par les valeurs de la colonne <code>Compte</code> puis nous multiplions par 100.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>summarized_df<span class="sc">$</span>Prop <span class="ot">=</span> summarized_df<span class="sc">$</span>Somme <span class="sc">/</span> summarized_df<span class="sc">$</span>Compte <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div>
-<p>Nous pouvons maintenant générer le graphique pour représenter les données.</p>
+<p><strong>Générer la figure</strong></p>
+<p>Nous pouvons maintenant générer la figure de type heat map pour représenter les données.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>heatmap_tous <span class="ot">=</span> <span class="fu">ggplot</span>(summarized_df, <span class="fu">aes</span>(<span class="at">x =</span> variable, <span class="at">y =</span> Module, <span class="at">fill =</span> Prop)) <span class="sc">+</span></span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>  <span class="fu">scale_fill_distiller</span>(<span class="at">palette =</span> <span class="st">&quot;Oranges&quot;</span>, <span class="at">direction =</span> <span class="dv">1</span>,</span>
@@ -214,12 +219,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a>        <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>, <span class="at">hjust=</span><span class="dv">0</span>), </span>
 <span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a>        <span class="at">strip.text.y.right =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>, <span class="at">angle =</span> <span class="dv">0</span>),</span>
 <span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a>        <span class="at">strip.background =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
-<p>Nous vous invitons à rechercher sur internet ce que fait chacun des paramètres et fonctions que nous utilisons avec la fonction ggplot(). On ne sait jamais, peut-être aurez vous à utiliser ces fonctions dans un future proche… Vous pouvez ensuite utiliser le symbole qui indique à R les commentaires pour annoter les fonctions et paramètres avec l’information que vous avez trouvé. Utilisez ensuite la fonction <code>ggsave()</code> pour enregistrer la figure produite.</p>
+<p>Nous vous invitons à rechercher sur internet ce que fait chacun des paramètres et fonctions que nous utilisons avec la fonction <code>ggplot()</code>. On ne sait jamais, peut-être aurez vous à utiliser ces fonctions dans un future proche… Vous pouvez ensuite utiliser le symbole qui indique à R les commentaires pour annoter les fonctions et paramètres avec l’information que vous avez trouvé. Utilisez ensuite la fonction <code>ggsave()</code> pour enregistrer la figure produite.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="at">filename =</span> <span class="st">&quot;heat_map_all.png&quot;</span>, <span class="at">plot =</span> heatmap_tous, <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">10</span>, <span class="at">units =</span> <span class="st">&quot;in&quot;</span>, <span class="at">dpi =</span> <span class="dv">500</span>)</span></code></pre></div>
 </div>
 <div id="excercice-2---générer-le-même-heatmap-mais-avec-uniquement-vos-trois-inconnus" class="section level2 hasAnchor" number="0.2">
 <h2><span class="header-section-number">0.2</span> Excercice 2 - Générer le même heatmap mais avec uniquement vos trois inconnus<a href="#excercice-2---générer-le-même-heatmap-mais-avec-uniquement-vos-trois-inconnus" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Nous avons vue au dernier laboratoire l’utilisation de la fonction <code>subset()</code> pour extraire uniquement certaines données définis d’un tableau de données. Effectuez une recherche internet afin de trouver comment utiliser cette fonction pour extraire vos trois inconnus du tableau de données <code>melted_df</code>. Vous devez ensuite rouler de nouveau chacune des commandes avec ce nouveau tableau de données pour obtenir un heat map avec uniquement vos trois inconnus. Cette figure est à inclure dans votre rapport de laboratoire.</p>
+<p>Nous avons vue au dernier laboratoire l’utilisation de la fonction <code>subset()</code> pour extraire uniquement certaines données définies d’un tableau de données. Effectuez une recherche internet afin de trouver comment utiliser cette fonction pour extraire vos trois inconnus du tableau de données <code>melted_df</code>. Vous devez ensuite rouler de nouveau chacune des commandes suivantes avec ce nouveau tableau de données pour obtenir un heat map avec uniquement vos trois inconnus. Cette figure est à inclure dans votre rapport de laboratoire.</p>
 <p>Bonne chance !</p>
 
 </div>
