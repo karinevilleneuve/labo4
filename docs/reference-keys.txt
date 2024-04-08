@@ -1,2 +1,3 @@
+heatmap
 excercice-1---genérer-un-heat-map-avec-toutes-les-bactéries
 excercice-2---générer-le-même-heatmap-mais-avec-uniquement-vos-trois-inconnus

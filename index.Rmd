@@ -8,6 +8,7 @@ biblio-style: apalike
 link-citations: yes
 github-repo: rstudio/bookdown-demo
 ---
+# Heatmap
 
 ## Excercice 1 - Genérer un heat map avec toutes les bactéries 
 
