@@ -47,10 +47,10 @@ Je vous encourage maintenant à ouvrir ce tableau en cliquant sur celui-ci dans 
 
 Nous allons ensuite utiliser des fonctions de la librairies [dplyr](https://dplyr.tidyverse.org/) afin de transformer nos données. 
 
-1. Nous groupons (`group_by`) en fonction des bactéries (colonne `variable`) et des modules (colonne `module`)
-2. Nous additionons les valeurs (fonction `sum()`), cette valeur sera conservée dans la nouvelle colonne `Somme`
-3. Nous dénombrons le nombre de rangé (fonction `n()`), cette valeur sera conservée dans la nouvelle colonne `Compte`)
-4. Afin de récupérer le nom des voies métaboliques associées aux différents modules nous dégroupons nos données (function `ungroup()`)
+1. Nous groupons (fonction `group_by`) en fonction des bactéries (colonne `variable`) et des modules (colonne `module`). 
+2. Nous additionons les valeurs (fonction `sum()`), cette valeur sera conservée dans la nouvelle colonne `Somme`. 
+3. Nous dénombrons le nombre de rangées (fonction `n()`), cette valeur sera conservée dans la nouvelle colonne `Compte`. 
+4. Afin de récupérer le nom des voies métaboliques associées aux différents modules nous dégroupons nos données (fonction `ungroup()`). 
 
 ```{r, eval= FALSE}
 summarized_df = melted_df %>% 
@@ -60,7 +60,7 @@ summarized_df = melted_df %>%
   ungroup()
 ```
 
-Finalement nous allons transformer nos valeurs en pourcentage. Cela nous permettra d'évaluer si vos bactéries possèdes l'ensemble des gènes associées à chacun des modules des différentes voies métaboliques. Pour ce faire nous divisons les valeurs de la colonne `Somme` par les valeurs de la colonne `Compte` puis nous multiplions par 100. 
+Finalement nous allons transformer nos valeurs en pourcentage. Cela vous permettra d'évaluer si vos bactéries possèdes l'ensemble des gènes associées à chacun des modules des différentes voies métaboliques. Pour ce faire les valeurs de la colonne `Somme` sont divisées par les valeurs de la colonne `Compte` puis multipliées par 100. 
 
 ```{r, eval= FALSE}
 summarized_df$Prop = summarized_df$Somme / summarized_df$Compte * 100
@@ -96,7 +96,7 @@ heatmap_tous = ggplot(summarized_df, aes(x = variable, y = Module, fill = Prop))
         strip.background = element_blank())
 ```
 
-Nous vous invitons à rechercher sur internet ce que fait chacun des paramètres et fonctions que nous utilisons avec la fonction `ggplot()`. On ne sait jamais, peut-être aurez vous à utiliser ces fonctions dans un future proche... Vous pouvez ensuite utiliser le symbole qui indique à R les commentaires pour annoter les fonctions et paramètres avec l'information que vous avez trouvé. Utilisez ensuite la fonction `ggsave()` pour enregistrer la figure produite. 
+Nous vous invitons à rechercher sur internet ce qu'effectue chacun des paramètres et fonctions que nous utilisons avec la fonction `ggplot()`... *on ne sait jamais, peut-être aurez vous à utiliser ces fonctions dans un future proche...* Vous pouvez ensuite utiliser le symbole qui indique à R les commentaires pour annoter les fonctions et paramètres avec l'information que vous avez trouvée. Utilisez ensuite la fonction `ggsave()` pour enregistrer la figure produite. 
 
 ```{r, eval= FALSE}
 ggsave(filename = "heat_map_all.png", plot = heatmap_tous, width = 10, height = 10, units = "in", dpi = 500)
@@ -104,7 +104,7 @@ ggsave(filename = "heat_map_all.png", plot = heatmap_tous, width = 10, height = 
 
 ## Excercice 2 - Générer le même heatmap mais avec uniquement vos trois inconnus 
 
-Nous avons vue au dernier laboratoire l'utilisation de la fonction `subset()` pour extraire uniquement certaines données définies d'un tableau de données. Effectuez une recherche internet afin de trouver comment utiliser cette fonction pour extraire vos trois inconnus du tableau de données `melted_df`. Vous devez ensuite rouler de nouveau chacune des commandes suivantes avec ce nouveau tableau de données pour obtenir un heat map avec uniquement vos trois inconnus. Cette figure est à inclure dans votre rapport de laboratoire. 
+Nous avons vue au dernier laboratoire l'utilisation de la fonction `subset()` pour extraire uniquement certaines données définies d'un tableau de données. Effectuez une recherche internet afin de trouver comment utiliser cette fonction pour extraire vos trois inconnus du tableau de données `melted_df`. Vous devez ensuite exécuter de nouveau chacune des commandes suivantes avec ce nouveau tableau de données pour obtenir un heat map avec uniquement vos trois bactéries Cette figure est à inclure dans votre rapport de laboratoire. 
 
 Bonne chance ! 
 
