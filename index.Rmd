@@ -10,15 +10,15 @@ github-repo: rstudio/bookdown-demo
 ---
 # Heatmap
 
-## Excercice 1 - Genérer un heat map avec toutes les bactéries 
+## Exercices 1 - Genérer un heat map avec toutes les bactéries 
 
-Télécharger le fichier `metabolic.csv` que vous trouverez dans le dossier Labo 4 de Moodle. 
+Téléchargez le fichier `metabolic.csv` que vous trouverez dans le dossier Labo 4 de Moodle. 
 
-Une fois télécharger, ouvrez R Studio et créer un nouveau script. Vérifier ensuite le répertoire de travail et assurez-vous que le fichier `metabolic.csv` s'y trouve (rappelez vous des commandes présentées au dernière laboratoire). 
+Une fois le téléchargement complété, ouvrez R Studio et créer un nouveau script. Vérifier ensuite le répertoire de travail et assurez-vous que le fichier `metabolic.csv` s'y trouve (rappelez-vous des commandes présentées au dernier laboratoire). 
 
 **Charger et installer les librairies**
 
-Ce sript requiert l'utilisation des librairies suivantes. Il est fort probable que certaine de ces libraires ne soient pas instllées par défault, vous devrez donc utiliser l'onglet `Packages` afin de les installer. 
+Ce sript requiert l'utilisation des *Packages* (librairies) suivants. Il est fort probable que certain ne soient pas installés par défault, vous devrez donc utiliser l'onglet `Packages` afin de les installer. 
 
 ```{r, eval= FALSE}
 library(dplyr)
@@ -29,27 +29,29 @@ library(scales)
 
 **Importer le fichier**
 
-Vous pouvez maintenant importer la table de données `metabolic.csv` dans R avec la fonction `read.table`
+Vous pouvez maintenant importer la table de données `metabolic.csv` dans R en utilisant la fonction `read.table`
 
 ```{r, eval= FALSE}
 data = read.table("metabolic.csv", sep=",", header=TRUE, check.names=FALSE)
 ``` 
 
+Vous devriez maintenant être en mesure de voir l'objet `data` dans votre environnement. Je vous encourage à ouvrir ce tableau en cliquant sur celui-ci dans votre environnement. Vous devriez être en mesure de constater que le fichier contient 96 rangées et 11 colonnes. Les colones représentent l'identifiant unique du gènes (`Gene_ID`), le nom de la voie métabolique (`Metabolism`), le nom du module de la voie (`Module`) puis les différentes bactéries. Pour chacune des bactéries, une valeur de **1** indique la présence du gène alors qu'une valeur de **0** indique sont absence.
+
 **Manipulation des données**
 
-Afin de générer le heat map nous devons restructurer le tableau de données. Pour ce faire nous utiliserons la fonction `metl`. 
+Afin de générer le heat map nous devons d'abord restructurer le tableau de données. Pour ce faire nous utiliserons la fonction `metl`. 
 
 ```{r, eval= FALSE}
 melted_df = melt(data)
 ```
 
-Je vous encourage maintenant à ouvrir ce tableau en cliquant sur celui-ci dans votre environnement et de comparer la disposition des données avec notre tableau original. 
+Je vous encourage maintenant à ouvrir ce tableau de le comparer la disposition des données avec notre tableau original. 
 
-Nous allons ensuite utiliser des fonctions de la librairies [dplyr](https://dplyr.tidyverse.org/) afin de transformer nos données. 
+Nous allons ensuite utiliser des fonctions du *Package* [dplyr](https://dplyr.tidyverse.org/) afin de transformer nos données. 
 
 1. Nous groupons (fonction `group_by`) en fonction des bactéries (colonne `variable`) et des modules (colonne `module`). 
-2. Nous additionons les valeurs (fonction `sum()`), cette valeur sera conservée dans la nouvelle colonne `Somme`. 
-3. Nous dénombrons le nombre de rangées (fonction `n()`), cette valeur sera conservée dans la nouvelle colonne `Compte`. 
+2. Les valeurs regroupées par la fonction précédentes sont additionnées (fonction `sum()`) et conservées dans la nouvelle colonne `Somme`. 
+3. Le nombre de rangées est dénombré (fonction `n()`) et conservé dans la nouvelle colonne `Compte`. 
 4. Afin de récupérer le nom des voies métaboliques associées aux différents modules nous dégroupons nos données (fonction `ungroup()`). 
 
 ```{r, eval= FALSE}
@@ -102,7 +104,7 @@ Nous vous invitons à rechercher sur internet ce qu'effectue chacun des paramèt
 ggsave(filename = "heat_map_all.png", plot = heatmap_tous, width = 10, height = 10, units = "in", dpi = 500)
 ```
 
-## Excercice 2 - Générer le même heatmap mais avec uniquement vos trois inconnus 
+## Exercices 2 - Générer le même heatmap mais avec uniquement vos trois inconnus 
 
 Nous avons vue au dernier laboratoire l'utilisation de la fonction `subset()` pour extraire uniquement certaines données définies d'un tableau de données. Effectuez une recherche internet afin de trouver comment utiliser cette fonction pour extraire vos trois inconnus du tableau de données `melted_df`. Vous devez ensuite exécuter de nouveau chacune des commandes suivantes avec ce nouveau tableau de données pour obtenir un heat map avec uniquement vos trois bactéries Cette figure est à inclure dans votre rapport de laboratoire. 
 
