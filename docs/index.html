@@ -185,7 +185,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><strong>Manipulation des données</strong></p>
 <p>Afin de générer le heat map nous devons d’abord restructurer le tableau de données. Pour ce faire nous utiliserons la fonction <code>metl</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>melted_df <span class="ot">=</span> <span class="fu">melt</span>(data)</span></code></pre></div>
-<p>Je vous encourage maintenant à ouvrir ce tableau de le comparer la disposition des données avec notre tableau original.</p>
+<p>Je vous encourage maintenant à ouvrir ce tableau de comparer la disposition des données avec notre tableau original (<code>data</code>).</p>
 <p>Nous allons ensuite utiliser des fonctions du <em>Package</em> <a href="https://dplyr.tidyverse.org/">dplyr</a> afin de transformer nos données.</p>
 <ol style="list-style-type: decimal">
 <li>Nous groupons (fonction <code>group_by</code>) en fonction des bactéries (colonne <code>variable</code>) et des modules (colonne <code>module</code>).</li>

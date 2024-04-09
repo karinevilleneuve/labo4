@@ -45,7 +45,7 @@ Afin de générer le heat map nous devons d'abord restructurer le tableau de don
 melted_df = melt(data)
 ```
 
-Je vous encourage maintenant à ouvrir ce tableau de le comparer la disposition des données avec notre tableau original. 
+Je vous encourage maintenant à ouvrir ce tableau de comparer la disposition des données avec notre tableau original (`data`). 
 
 Nous allons ensuite utiliser des fonctions du *Package* [dplyr](https://dplyr.tidyverse.org/) afin de transformer nos données. 
 
