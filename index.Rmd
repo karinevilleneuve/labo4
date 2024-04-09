@@ -37,7 +37,7 @@ data = read.table("metabolic.csv", sep=",", header=TRUE, check.names=FALSE)
 
 Vous devriez maintenant être en mesure de voir l'objet `data` dans votre environnement. Je vous encourage à ouvrir ce tableau en cliquant sur celui-ci dans votre environnement. Vous devriez être en mesure de constater que le fichier contient 96 rangées et 11 colonnes. Les colones représentent l'identifiant unique du gènes (`Gene_ID`), le nom de la voie métabolique (`Metabolism`), le nom du module de la voie (`Module`) puis les différentes bactéries. Pour chacune des bactéries, une valeur de **1** indique la présence du gène alors qu'une valeur de **0** indique sont absence.
 
-**Manipulation des données**
+**Restructurer les données**
 
 Afin de générer le heat map nous devons d'abord restructurer le tableau de données. Pour ce faire nous utiliserons la fonction `metl`. 
 
@@ -46,6 +46,8 @@ melted_df = melt(data)
 ```
 
 Je vous encourage maintenant à ouvrir ce tableau de comparer la disposition des données avec notre tableau original (`data`). 
+
+**Manipuler les données**
 
 Nous allons ensuite utiliser des fonctions du *Package* [dplyr](https://dplyr.tidyverse.org/) afin de transformer nos données. 
 
@@ -104,9 +106,9 @@ Nous vous invitons à rechercher sur internet ce qu'effectue chacun des paramèt
 ggsave(filename = "heat_map_all.png", plot = heatmap_tous, width = 10, height = 10, units = "in", dpi = 500)
 ```
 
-## Exercices 2 - Générer le même heatmap mais avec uniquement vos trois inconnus 
+## Exercices 2 - Générer un heatmap mais avec vos trois inconnus 
 
-Nous avons vue au dernier laboratoire l'utilisation de la fonction `subset()` pour extraire uniquement certaines données définies d'un tableau de données. Effectuez une recherche internet afin de trouver comment utiliser cette fonction pour extraire vos trois inconnus du tableau de données `melted_df`. Vous devez ensuite exécuter de nouveau chacune des commandes suivantes avec ce nouveau tableau de données pour obtenir un heat map avec uniquement vos trois bactéries Cette figure est à inclure dans votre rapport de laboratoire. 
+Nous avons vue au dernier laboratoire l'utilisation de la fonction `subset()` pour extraire uniquement certaines données définies d'un tableau de données. Effectuez une recherche internet afin de trouver comment utiliser cette fonction pour extraire vos trois inconnus du tableau de données `melted_df`. Vous devez ensuite exécuter de nouveau chacune des commandes à partir de la section **Manipuler les données** avec ce nouveau tableau de données afin d'obtenir un heat map avec uniquement vos trois bactéries. Cette figure est à inclure dans votre rapport de laboratoire. 
 
 Bonne chance ! 
 
