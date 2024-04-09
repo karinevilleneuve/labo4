@@ -140,8 +140,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="#heatmap"><i class="fa fa-check"></i><b>1</b> Heatmap</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="#excercice-1---genérer-un-heat-map-avec-toutes-les-bactéries"><i class="fa fa-check"></i><b>1.1</b> Excercice 1 - Genérer un heat map avec toutes les bactéries</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="#excercice-2---générer-le-même-heatmap-mais-avec-uniquement-vos-trois-inconnus"><i class="fa fa-check"></i><b>1.2</b> Excercice 2 - Générer le même heatmap mais avec uniquement vos trois inconnus</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="#exercices-1---genérer-un-heat-map-avec-toutes-les-bactéries"><i class="fa fa-check"></i><b>1.1</b> Exercices 1 - Genérer un heat map avec toutes les bactéries</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="#exercices-2---générer-le-même-heatmap-mais-avec-uniquement-vos-trois-inconnus"><i class="fa fa-check"></i><b>1.2</b> Exercices 2 - Générer le même heatmap mais avec uniquement vos trois inconnus</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -168,28 +168,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="heatmap" class="section level1 hasAnchor" number="1">
 <h1><span class="header-section-number">Chapitre 1</span> Heatmap<a href="#heatmap" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="excercice-1---genérer-un-heat-map-avec-toutes-les-bactéries" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Excercice 1 - Genérer un heat map avec toutes les bactéries<a href="#excercice-1---genérer-un-heat-map-avec-toutes-les-bactéries" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Télécharger le fichier <code>metabolic.csv</code> que vous trouverez dans le dossier Labo 4 de Moodle.</p>
-<p>Une fois télécharger, ouvrez R Studio et créer un nouveau script. Vérifier ensuite le répertoire de travail et assurez-vous que le fichier <code>metabolic.csv</code> s’y trouve (rappelez vous des commandes présentées au dernière laboratoire).</p>
+<div id="exercices-1---genérer-un-heat-map-avec-toutes-les-bactéries" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Exercices 1 - Genérer un heat map avec toutes les bactéries<a href="#exercices-1---genérer-un-heat-map-avec-toutes-les-bactéries" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Téléchargez le fichier <code>metabolic.csv</code> que vous trouverez dans le dossier Labo 4 de Moodle.</p>
+<p>Une fois le téléchargement complété, ouvrez R Studio et créer un nouveau script. Vérifier ensuite le répertoire de travail et assurez-vous que le fichier <code>metabolic.csv</code> s’y trouve (rappelez-vous des commandes présentées au dernier laboratoire).</p>
 <p><strong>Charger et installer les librairies</strong></p>
-<p>Ce sript requiert l’utilisation des librairies suivantes. Il est fort probable que certaine de ces libraires ne soient pas instllées par défault, vous devrez donc utiliser l’onglet <code>Packages</code> afin de les installer.</p>
+<p>Ce sript requiert l’utilisation des <em>Packages</em> (librairies) suivants. Il est fort probable que certain ne soient pas installés par défault, vous devrez donc utiliser l’onglet <code>Packages</code> afin de les installer.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(reshape2) </span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
 <span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="fu">library</span>(scales) </span></code></pre></div>
 <p><strong>Importer le fichier</strong></p>
-<p>Vous pouvez maintenant importer la table de données <code>metabolic.csv</code> dans R avec la fonction <code>read.table</code></p>
+<p>Vous pouvez maintenant importer la table de données <code>metabolic.csv</code> dans R en utilisant la fonction <code>read.table</code></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>data <span class="ot">=</span> <span class="fu">read.table</span>(<span class="st">&quot;metabolic.csv&quot;</span>, <span class="at">sep=</span><span class="st">&quot;,&quot;</span>, <span class="at">header=</span><span class="cn">TRUE</span>, <span class="at">check.names=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<p>Vous devriez maintenant être en mesure de voir l’objet <code>data</code> dans votre environnement. Je vous encourage à ouvrir ce tableau en cliquant sur celui-ci dans votre environnement. Vous devriez être en mesure de constater que le fichier contient 96 rangées et 11 colonnes. Les colones représentent l’identifiant unique du gènes (<code>Gene_ID</code>), le nom de la voie métabolique (<code>Metabolism</code>), le nom du module de la voie (<code>Module</code>) puis les différentes bactéries. Pour chacune des bactéries, une valeur de <strong>1</strong> indique la présence du gène alors qu’une valeur de <strong>0</strong> indique sont absence.</p>
 <p><strong>Manipulation des données</strong></p>
-<p>Afin de générer le heat map nous devons restructurer le tableau de données. Pour ce faire nous utiliserons la fonction <code>metl</code>.</p>
+<p>Afin de générer le heat map nous devons d’abord restructurer le tableau de données. Pour ce faire nous utiliserons la fonction <code>metl</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>melted_df <span class="ot">=</span> <span class="fu">melt</span>(data)</span></code></pre></div>
-<p>Je vous encourage maintenant à ouvrir ce tableau en cliquant sur celui-ci dans votre environnement et de comparer la disposition des données avec notre tableau original.</p>
-<p>Nous allons ensuite utiliser des fonctions de la librairies <a href="https://dplyr.tidyverse.org/">dplyr</a> afin de transformer nos données.</p>
+<p>Je vous encourage maintenant à ouvrir ce tableau de le comparer la disposition des données avec notre tableau original.</p>
+<p>Nous allons ensuite utiliser des fonctions du <em>Package</em> <a href="https://dplyr.tidyverse.org/">dplyr</a> afin de transformer nos données.</p>
 <ol style="list-style-type: decimal">
 <li>Nous groupons (fonction <code>group_by</code>) en fonction des bactéries (colonne <code>variable</code>) et des modules (colonne <code>module</code>).</li>
-<li>Nous additionons les valeurs (fonction <code>sum()</code>), cette valeur sera conservée dans la nouvelle colonne <code>Somme</code>.</li>
-<li>Nous dénombrons le nombre de rangées (fonction <code>n()</code>), cette valeur sera conservée dans la nouvelle colonne <code>Compte</code>.</li>
+<li>Les valeurs regroupées par la fonction précédentes sont additionnées (fonction <code>sum()</code>) et conservées dans la nouvelle colonne <code>Somme</code>.</li>
+<li>Le nombre de rangées est dénombré (fonction <code>n()</code>) et conservé dans la nouvelle colonne <code>Compte</code>.</li>
 <li>Afin de récupérer le nom des voies métaboliques associées aux différents modules nous dégroupons nos données (fonction <code>ungroup()</code>).</li>
 </ol>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>summarized_df <span class="ot">=</span> melted_df <span class="sc">%&gt;%</span> </span>
@@ -227,8 +228,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Nous vous invitons à rechercher sur internet ce qu’effectue chacun des paramètres et fonctions que nous utilisons avec la fonction <code>ggplot()</code>… <em>on ne sait jamais, peut-être aurez vous à utiliser ces fonctions dans un future proche…</em> Vous pouvez ensuite utiliser le symbole qui indique à R les commentaires pour annoter les fonctions et paramètres avec l’information que vous avez trouvée. Utilisez ensuite la fonction <code>ggsave()</code> pour enregistrer la figure produite.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="at">filename =</span> <span class="st">&quot;heat_map_all.png&quot;</span>, <span class="at">plot =</span> heatmap_tous, <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">10</span>, <span class="at">units =</span> <span class="st">&quot;in&quot;</span>, <span class="at">dpi =</span> <span class="dv">500</span>)</span></code></pre></div>
 </div>
-<div id="excercice-2---générer-le-même-heatmap-mais-avec-uniquement-vos-trois-inconnus" class="section level2 hasAnchor" number="1.2">
-<h2><span class="header-section-number">1.2</span> Excercice 2 - Générer le même heatmap mais avec uniquement vos trois inconnus<a href="#excercice-2---générer-le-même-heatmap-mais-avec-uniquement-vos-trois-inconnus" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="exercices-2---générer-le-même-heatmap-mais-avec-uniquement-vos-trois-inconnus" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Exercices 2 - Générer le même heatmap mais avec uniquement vos trois inconnus<a href="#exercices-2---générer-le-même-heatmap-mais-avec-uniquement-vos-trois-inconnus" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Nous avons vue au dernier laboratoire l’utilisation de la fonction <code>subset()</code> pour extraire uniquement certaines données définies d’un tableau de données. Effectuez une recherche internet afin de trouver comment utiliser cette fonction pour extraire vos trois inconnus du tableau de données <code>melted_df</code>. Vous devez ensuite exécuter de nouveau chacune des commandes suivantes avec ce nouveau tableau de données pour obtenir un heat map avec uniquement vos trois bactéries Cette figure est à inclure dans votre rapport de laboratoire.</p>
 <p>Bonne chance !</p>
 
