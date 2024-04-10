@@ -172,8 +172,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">1.1</span> Exercices 1 - Genérer un heat map avec toutes les bactéries<a href="#exercices-1---genérer-un-heat-map-avec-toutes-les-bactéries" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Téléchargez le fichier <code>metabolic.csv</code> que vous trouverez dans le dossier Labo 4 de Moodle.</p>
 <p>Une fois le téléchargement complété, ouvrez R Studio et créer un nouveau script. Vérifier ensuite le répertoire de travail et assurez-vous que le fichier <code>metabolic.csv</code> s’y trouve (rappelez-vous des commandes présentées au dernier laboratoire).</p>
-<p><strong>Charger et installer les librairies</strong></p>
-<p>Ce sript requiert l’utilisation des <em>Packages</em> (librairies) suivants. Il est fort probable que certain ne soient pas installés par défault, vous devrez donc utiliser l’onglet <code>Packages</code> afin de les installer.</p>
+<p><strong>Installer les librairies</strong></p>
+<p>Ce sript requiert l’utilisation des <em>Packages</em> (librairies) suivants. Ces derniers ne sont pas nécessairement installés par défault, vous devrez donc utiliser l’onglet <code>Packages</code> afin de les installer.</p>
+<ul>
+<li><strong>dyplr</strong> (pour les fonctions <code>group_by()</code> et <code>mutate()</code>)</li>
+<li><strong>reshape2</strong> (pour la fonction <code>reshape()</code>)</li>
+<li><strong>ggplot2</strong> (pour la fonction <code>ggplot()</code> utilisée pour générer les figures)</li>
+<li><strong>scales</strong> (pour la fonction <code>scale_fill_distiller()</code> utilisée pour obtenir une palette de couleur particulière pour la figure)</li>
+</ul>
+<p>Une autre option d’installation consiste à utiliser la fonction <code>install.packages()</code>.</p>
+<p><strong>Charger les libraires</strong></p>
+<p>Un package à besoin d’être installé qu’une seule fois, mais peut requérir des mises à jours sporadique. Une fois le package installé, pour utiliser une fonction se trouvant au sein de ce dernier, il ne suffit pas de simplement installer le package ; il faut également utiliser la fonction <code>library()</code> à chaque début de session R pour “charger” le package.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(reshape2) </span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>

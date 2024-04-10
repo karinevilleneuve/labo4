@@ -16,9 +16,20 @@ Téléchargez le fichier `metabolic.csv` que vous trouverez dans le dossier Labo
 
 Une fois le téléchargement complété, ouvrez R Studio et créer un nouveau script. Vérifier ensuite le répertoire de travail et assurez-vous que le fichier `metabolic.csv` s'y trouve (rappelez-vous des commandes présentées au dernier laboratoire). 
 
-**Charger et installer les librairies**
+**Installer les librairies**
 
-Ce sript requiert l'utilisation des *Packages* (librairies) suivants. Il est fort probable que certain ne soient pas installés par défault, vous devrez donc utiliser l'onglet `Packages` afin de les installer. 
+Ce sript requiert l'utilisation des *Packages* (librairies) suivants. Ces derniers ne sont pas nécessairement installés par défault, vous devrez donc utiliser l'onglet `Packages` afin de les installer. 
+
+- **dyplr** (pour les fonctions `group_by()` et `mutate()`)
+- **reshape2** (pour la fonction `reshape()`)
+- **ggplot2**  (pour la fonction `ggplot()` utilisée pour générer les figures)
+- **scales** (pour la fonction `scale_fill_distiller()` utilisée pour obtenir une palette de couleur particulière pour la figure)
+
+Une autre option d'installation consiste à utiliser la fonction `install.packages()`. 
+
+**Charger les libraires**
+
+Un package à besoin d'être installé qu'une seule fois, mais peut requérir des mises à jours sporadique. Une fois le package installé, pour utiliser une fonction se trouvant au sein de ce dernier, il ne suffit pas de simplement installer le package ; il faut également utiliser la fonction `library()` à chaque début de session R pour “charger” le package.
 
 ```{r, eval= FALSE}
 library(dplyr)
