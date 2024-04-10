@@ -23,7 +23,7 @@ Ce sript requiert l'utilisation des *Packages* (librairies) suivants. Ces dernie
 |Package     |Fonctions                                                         |
 |:-----------|:-----------------------------------------------------------------|
 | reshape2   | `reshape()`                                                      |
-| dyplr      | `group_by()` et `mutate()`                                       |
+| dplyr      | `group_by()` et `mutate()`                                       |
 | ggplot2    | `ggplot()` utilisée pour générer les figures                     |
 | scales     | `scale_fill_distiller()` pour la palette de couleur des figures  |
 
