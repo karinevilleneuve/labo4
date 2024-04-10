@@ -174,12 +174,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Une fois le téléchargement complété, ouvrez R Studio et créer un nouveau script. Vérifier ensuite le répertoire de travail et assurez-vous que le fichier <code>metabolic.csv</code> s’y trouve (rappelez-vous des commandes présentées au dernier laboratoire).</p>
 <p><strong>Installer les librairies</strong></p>
 <p>Ce sript requiert l’utilisation des <em>Packages</em> (librairies) suivants. Ces derniers ne sont pas nécessairement installés par défault, vous devrez donc utiliser l’onglet <code>Packages</code> afin de les installer.</p>
-<ul>
-<li><strong>dyplr</strong> (pour les fonctions <code>group_by()</code> et <code>mutate()</code>)</li>
-<li><strong>reshape2</strong> (pour la fonction <code>reshape()</code>)</li>
-<li><strong>ggplot2</strong> (pour la fonction <code>ggplot()</code> utilisée pour générer les figures)</li>
-<li><strong>scales</strong> (pour la fonction <code>scale_fill_distiller()</code> utilisée pour obtenir une palette de couleur particulière pour la figure)</li>
-</ul>
+<table>
+<colgroup>
+<col width="15%" />
+<col width="84%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Package</th>
+<th align="left">Fonctions</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">reshape2</td>
+<td align="left"><code>reshape()</code></td>
+</tr>
+<tr class="even">
+<td align="left">dyplr</td>
+<td align="left"><code>group_by()</code> et <code>mutate()</code></td>
+</tr>
+<tr class="odd">
+<td align="left">ggplot2</td>
+<td align="left"><code>ggplot()</code> utilisée pour générer les figures</td>
+</tr>
+<tr class="even">
+<td align="left">scales</td>
+<td align="left"><code>scale_fill_distiller()</code> pour la palette de couleur des figures</td>
+</tr>
+</tbody>
+</table>
 <p>Une autre option d’installation consiste à utiliser la fonction <code>install.packages()</code>.</p>
 <p><strong>Charger les libraires</strong></p>
 <p>Un package à besoin d’être installé qu’une seule fois, mais peut requérir des mises à jours sporadique. Une fois le package installé, pour utiliser une fonction se trouvant au sein de ce dernier, il ne suffit pas de simplement installer le package ; il faut également utiliser la fonction <code>library()</code> à chaque début de session R pour “charger” le package.</p>

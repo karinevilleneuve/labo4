@@ -18,12 +18,15 @@ Une fois le téléchargement complété, ouvrez R Studio et créer un nouveau sc
 
 **Installer les librairies**
 
-Ce sript requiert l'utilisation des *Packages* (librairies) suivants. Ces derniers ne sont pas nécessairement installés par défault, vous devrez donc utiliser l'onglet `Packages` afin de les installer. 
+Ce sript requiert l'utilisation des *Packages* (librairies) suivants. Ces derniers ne sont pas nécessairement installés par défault, vous devrez donc utiliser l'onglet `Packages` afin de les installer.
 
-- **dyplr** (pour les fonctions `group_by()` et `mutate()`)
-- **reshape2** (pour la fonction `reshape()`)
-- **ggplot2**  (pour la fonction `ggplot()` utilisée pour générer les figures)
-- **scales** (pour la fonction `scale_fill_distiller()` utilisée pour obtenir une palette de couleur particulière pour la figure)
+|Package     |Fonctions                                                         |
+|:-----------|:-----------------------------------------------------------------|
+| reshape2   | `reshape()`                                                      |
+| dyplr      | `group_by()` et `mutate()`                                       |
+| ggplot2    | `ggplot()` utilisée pour générer les figures                     |
+| scales     | `scale_fill_distiller()` pour la palette de couleur des figures  |
+
 
 Une autre option d'installation consiste à utiliser la fonction `install.packages()`. 
 
